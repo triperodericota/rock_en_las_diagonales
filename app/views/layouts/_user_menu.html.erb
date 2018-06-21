@@ -1,0 +1,13 @@
+
+<% if user_signed_in? %>
+  <div class="col">
+    <%= link_to 'Cerrar sesión', destroy_user_session_path, method: :delete %>
+  </div>
+<% else %>
+  <div class="col">
+    <%= link_to 'Registrarse', fan_sign_up_path %>
+  </div>
+  <div class="col">
+    <%= link_to 'Iniciar sesion', new_user_session_path %>
+  </div>
+<% end %>

@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -6,7 +7,7 @@ class User < ApplicationRecord
 
   belongs_to :profile, polymorphic: true
 
-  validates :name, presence: true, length: { maximum: 20 }
+  validates :username, presence: true, length: { maximum: 20 }
 
 
 end

@@ -1,0 +1,24 @@
+<%= simple_form_for @artist, url: artists_path do |f| %>
+  <% if artist.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(artist.errors.count, "error") %> prohibited this artist from being saved:</h2>
+
+      <ul>
+      <% artist.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.simple_fields_for @user do |u| %>
+     <%= u.input :name, label: 'Nombre de usuario' %>
+     <%= u.input :email, placeholder: 'ejemplo@mail.com', input_html: {:class => 'form-control'}  %>
+     <%= u.input :password, hint: 'Debe tener como minimo 8 caracteres', input_html: {:class => 'form-control'} %>
+     <%= u.input :password_confirmation, input_html: {:class => 'form-control'} %>
+  <% end %>
+  <%= f.input :name, placeholder: 'Ingresa el nombre de tu grupo artístico', input_html: {:class => 'form-control'}  %>
+  <%= f.input :description, input_html: {:class => 'form-control'}  %>
+  <div class="actions">
+    <%= f.submit 'Registrarse', class: 'btn btn-primary' %>
+  </div>
+<% end %>

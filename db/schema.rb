@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_14_170946) do
+ActiveRecord::Schema.define(version: 2018_06_20_001233) do
 
   create_table "artists", force: :cascade do |t|
     t.text "description"
@@ -36,15 +36,15 @@ ActiveRecord::Schema.define(version: 2018_06_14_170946) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.string "name", limit: 20, null: false
+    t.string "username", limit: 20, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "profile_id"
     t.string "profile_type"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["name"], name: "index_users_on_name", unique: true
     t.index ["profile_id", "profile_type"], name: "index_users_on_profile_id_and_profile_type"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
 end
