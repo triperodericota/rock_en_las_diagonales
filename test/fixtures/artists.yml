@@ -1,9 +1,8 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  description: MyText
-  name: MyString
+artist1:
+  description: Puro rock and roll
+  name: La blusera
 
-two:
-  description: MyText
-  name: MyString
+artist2:
+  description:
+  name: Patricio Rey

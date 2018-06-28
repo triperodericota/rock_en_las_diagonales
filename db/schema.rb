@@ -10,12 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_20_001233) do
+ActiveRecord::Schema.define(version: 2018_06_22_012547) do
 
   create_table "artists", force: :cascade do |t|
     t.text "description"
     t.string "name", limit: 30
     t.index ["name"], name: "index_artists_on_name", unique: true
+  end
+
+  create_table "artists_fans", id: false, force: :cascade do |t|
+    t.integer "artist_id", null: false
+    t.integer "fan_id", null: false
+    t.index ["artist_id", "fan_id"], name: "index_artists_fans_on_artist_id_and_fan_id"
   end
 
   create_table "fans", force: :cascade do |t|

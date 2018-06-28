@@ -70,6 +70,7 @@ GEM
       sass (>= 3.5.2)
     builder (3.2.3)
     byebug (10.0.2)
+    cancancan (2.2.0)
     capybara (3.2.1)
       addressable
       mini_mime (>= 0.1.3)
@@ -220,6 +221,7 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.1.1)
   byebug
+  cancancan (~> 2.0)
   capybara (>= 2.15, < 4.0)
   chromedriver-helper
   devise!
@@ -239,9 +241,6 @@ DEPENDENCIES
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
-
-RUBY VERSION
-   ruby 2.3.1p112
 
 BUNDLED WITH
    1.16.0

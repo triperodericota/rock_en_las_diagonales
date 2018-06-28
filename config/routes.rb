@@ -3,12 +3,13 @@ Rails.application.routes.draw do
   resources :artists, param: :name, only: [:index, :show, :destroy ]
   resources :fans, only: [:index, :show, :destroy]
 
-  devise_for :users, controllers: { registrations: 'user/registrations' }
-
   devise_scope :user do
-    get 'artist/sign_up' => 'user/registrations#new', :users => {:user_type => 'artist' }
-    get 'fan/sign_up' => 'user/registrations#new', :users => {:user_type => 'fan' }
+    get '/sign_up/(:type)', to: 'user/registrations#new', as: 'sign_up'
+    get 'profile', to: 'user/registrations#edit'
+    get '/log_in', to: 'devise/sessions#new'
   end
+
+  devise_for :users, controllers: { registrations: 'user/registrations' }
 
   get 'welcome/index'
 
