@@ -11,11 +11,11 @@ class Artist < ApplicationRecord
   end
 
   def amount_of_followers
-
+    self.fans.size
   end
 
   def is_followed_for?(aFan)
-
+    self.fans.include? aFan
   end
 
 end
