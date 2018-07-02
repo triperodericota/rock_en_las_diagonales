@@ -13,3 +13,13 @@
  */
 
 @import "bootstrap";
+@import "welcome";
+
+.login-error{
+  color: red;
+  font-size: x-small;
+}
+
+.login-error > p {
+  margin-bottom: 0rem;
+}

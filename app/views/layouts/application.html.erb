@@ -14,34 +14,15 @@
   </head>
 
   <body>
-    <div class="container-fluid">
-      <div class="row">
-        <!-- left panel -->
-        <div class="col-md-3">
-          <div class="row">
-            <%= render :partial => 'layouts/user_menu' %>
-          </div>
-          <div class="row">
-            <div class="col">
-              <!-- LOGO -->
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <!-- artist searcher -->
-            </div>
-          </div>
-        </div>
 
-        <div class="col-md-8">
-          <p class="notice"><%= notice %></p>
-          <p class="alert"><%= alert %></p>
+    <%= render partial: 'layouts/header' %>
 
-          <%= yield %>
-        </div>
-      </div>
-
-    </div>
+    <main role="main">
+    <!--  <p class="notice"><% notice %></p>
+      <p class="alert"><% alert %></p>
+    -->
+      <%= yield %>
+    </main>
 
   </body>
 </html>

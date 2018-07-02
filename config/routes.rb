@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     get '/log_in', to: 'devise/sessions#new'
   end
 
-  devise_for :users, controllers: { registrations: 'user/registrations' }
+  devise_for :users, controllers: { registrations: 'user/registrations', sessions: 'user/sessions' }
 
   get 'welcome/index'
 
