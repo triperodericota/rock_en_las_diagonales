@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
   <head>
     <title>RockEnLasDiagonales</title>
     <meta name="description" content="Rock en las diagonales" />
@@ -13,16 +13,20 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-
-    <%= render partial: 'layouts/header' %>
-
-    <main role="main">
+  <body class="fixed-nav sticky-footer" id="page-top">
+    <%= render partial: 'layouts/navbar' %>
     <!--  <p class="notice"><% notice %></p>
       <p class="alert"><% alert %></p>
     -->
+    <% if user_signed_in? %>
+      <div class="content-wrapper">
+        <div class="content-fluid">
+          <%= yield %>
+        </div>
+      </div>
+    <% else %>
       <%= yield %>
-    </main>
+    <% end %>
 
   </body>
 </html>

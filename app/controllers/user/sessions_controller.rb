@@ -3,14 +3,14 @@
 class User::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
-  # GET /users/sign_in
+  # GET /user/sign_in
    def new
-     super
+     # redirect to welcome#index because here exist the unique login form
+     redirect_to root_path
    end
 
-   # POST /users/sign_in
+   # POST /user/sign_in
    def create
-     logger.debug "sign_in params = #{sign_in_params}"
      user = User.find_by(email: sign_in_params[:email])
      if user
        if user.valid_password? sign_in_params[:password]
@@ -27,7 +27,7 @@ class User::SessionsController < Devise::SessionsController
      end
    end
 
-   # DELETE /users/sign_out
+   # DELETE /user/sign_out
    def destroy
      super
    end

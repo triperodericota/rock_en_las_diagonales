@@ -5,7 +5,7 @@ class User::RegistrationsController < Devise::RegistrationsController
    before_action :configure_sign_up_params, only: [:create]
    before_action :configure_account_update_params, only: [:update]
 
-   #  GET /users/sign_up or /sign_up/(:type)
+   #  GET /user/sign_up or /sign_up/(:type)
    def new
      user_param = request.path_parameters[:type]
      if user_param.nil? || !(["fan","artist"].include? user_param )
@@ -16,7 +16,7 @@ class User::RegistrationsController < Devise::RegistrationsController
      super
    end
 
-   # POST /users
+   # POST /user
    def create
      user_params = sign_up_params
      #take out user_type from user_params
@@ -50,7 +50,7 @@ class User::RegistrationsController < Devise::RegistrationsController
      end
    end
 
-   # GET /users/edit
+   # GET /user/edit
    def edit
      super
    end
@@ -87,14 +87,14 @@ class User::RegistrationsController < Devise::RegistrationsController
      end
    end
 
-   # DELETE /users
+   # DELETE /user
    def destroy
      super
    end
 
    # GET /resource/cancel
    # Forces the session data which is usually expired after sign
-   # in to be expired now. This is useful if the users wants to
+   # in to be expired now. This is useful if the user wants to
    # cancel oauth signing in/up in the middle of the process,
    # removing all OAuth session data.
    def cancel

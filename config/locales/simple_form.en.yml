@@ -14,14 +14,14 @@ en:
     # labels:
     #   defaults:
     #     password: 'Password'
-    #   users:
+    #   user:
     #     new:
     #       email: 'E-mail to sign in.'
     #     edit:
     #       email: 'E-mail.'
     # hints:
     #   defaults:
-    #     username: 'users name to sign in.'
+    #     username: 'user name to sign in.'
     #     password: 'No special characters, please.'
     # include_blanks:
     #   defaults:

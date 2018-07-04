@@ -14,6 +14,13 @@
 
 @import "bootstrap";
 @import "welcome";
+@import "navbar";
+@import "font-awesome";
+
+
+main{
+  margin-top: 5%;
+}
 
 .login-error{
   color: red;
@@ -22,4 +29,12 @@
 
 .login-error > p {
   margin-bottom: 0rem;
+}
+
+#register-link{
+  color: white;
+}
+
+#signup-form{
+  margin-top: 5%;
 }
