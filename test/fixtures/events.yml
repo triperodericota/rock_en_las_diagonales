@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+event1:
+  title: Patricio Rey en el Poli
+  description:
+  place: Polideportivo Victor Nethol
+  start_date: 1989-07-04 21:00:00
+  end_date: 1989-07-05 00:00:00
+  artist: artist2
+
+event2:
+  title: Menphis La Blusera en vivo
+  description: La Blusera toca en el Luna Park
+  place: Luna Park
+  start_date: 2022-09-04 22:22:22
+  end_date: 2022-10-04 10:50:29
+  artist: artist1
+
+event3:
+  title: Menphis La Blusera en vivo
+  description: La Blusera toca en Club Atenas
+  place: Club Atenas
+  start_date: 2022-09-05 22:22:22
+  end_date: 2022-10-06 10:50:29
+  artist: artist1

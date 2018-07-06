@@ -1,0 +1,14 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+event1_fan1:
+  event: event1
+  fan: fan1
+
+event1_fan2:
+  event: event1
+  fan: fan2
+
+event2_fan1:
+  event: event2
+  fan: fan1
+

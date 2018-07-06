@@ -5,8 +5,9 @@ class ArtistTest < ActiveSupport::TestCase
   setup do
     @artist1 = artists(:artist1)
     @artist2 = artists(:artist2)
-    @artist3 = Artist.new(name: 'Riff')
+    @artist3 = Artist.create(name: 'Riff')
     @artist1.fans << fans(:fan1) <<  fans(:fan2)
+    @event_artist3 = Event.create(title: 'new event', start_date: (DateTime.current - 2.hours), end_date: (DateTime.current + 1.hour), artist: @artist3)
   end
 
   teardown do
@@ -46,6 +47,17 @@ class ArtistTest < ActiveSupport::TestCase
     assert_not @artist2.is_followed_for? fans(:fan1)
   end
 
+  test "should valid past events" do
+    assert_includes @artist2.past_events, events(:event1)
+  end
 
+  test "should valid next events" do
+    assert_includes @artist1.next_events, events(:event2)
+  end
+
+  test "should valid next events including current event" do
+    assert_includes @artist3.next_events, @event_artist3
+    assert_not_includes @artist3.past_events, @event_artist3
+  end
 
 end

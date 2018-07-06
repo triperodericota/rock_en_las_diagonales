@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :artists, param: :name, only: [:index, :show, :destroy ]
+  resources :artists, param: :name, only: [:index, :show, :destroy ] do
+    resources :events
+  end
   resources :fans, only: [:index, :show, :destroy]
 
   devise_scope :user do
