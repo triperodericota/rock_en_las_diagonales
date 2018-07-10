@@ -1,5 +1,10 @@
-<h1>New Event</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
 
-<%= render 'form', event: @event %>
-
-<%= link_to 'Back', events_path %>
+      <h2>Crear evento</h2>
+      <%= @button_name = 'Crear'
+        render 'form', event: @event %>
+    </div>
+  </div>
+</div>

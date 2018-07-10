@@ -1,34 +1,31 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @event.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
-
-<p>
-  <strong>Place:</strong>
-  <%= @event.place %>
-</p>
-
-<p>
-  <strong>Start date:</strong>
-  <%= @event.start_date %>
-</p>
-
-<p>
-  <strong>End date:</strong>
-  <%= @event.end_date %>
-</p>
-
-<p>
-  <strong>Artist:</strong>
-  <%= @event.artist %>
-</p>
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+           <!-- buttons -->
+        </div>
+        <div class="card-body">
+          <!-- event image
+            image_tag(@event.path_to_image, class: "card-img-top")
+           -->
+          <h4 class="card-title"><%= @event.title %></h4>
+          <p class="card-text"><%= @event.description %></p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item list-group-item-action">
+              <h6>D&oacutende es?</h6>
+              <p><%= @event.place %></p>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <h6>Hora</h6>
+              <p><%= @event.start_date.to_s(:long_ordinal) %> - <%= @event.end_date.to_s(:long_ordinal) %></p>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <h6>Organizado por <%= link_to @event.artist.name, artist_path(@event.artist_id) %></h6>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

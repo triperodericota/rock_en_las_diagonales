@@ -16,6 +16,14 @@ class Event < ApplicationRecord
     end
   end
 
+  def finished?
+    self.end_date < DateTime.current
+  end
+
+  def currently?
+    DateTime.current.between?(self.start_date, self.end_date)
+  end
+
   def audience_amount
     self.fans.size
   end
@@ -25,8 +33,8 @@ class Event < ApplicationRecord
   end
 
   def how_much_time_is_left_to_start
-    return "Evento finalizado" if self.end_date <= DateTime.current
-    return "Evento en curso" if DateTime.current.between?(self.start_date, self.end_date)
+    return "Evento finalizado" if self.finished?
+    return "Evento en curso" if self.currently?
     how_much_time = ActiveSupport::Duration.build(self.start_date - DateTime.current)
     return create_string_response(how_much_time)
   end

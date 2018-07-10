@@ -1,6 +1,10 @@
-<h1>Editing Event</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
 
-<%= render 'form', event: @event %>
-
-<%= link_to 'Show', @event %> |
-<%= link_to 'Back', events_path %>
+      <h2>Editar evento</h2>
+      <%= @button_name = 'Actualizar'
+        render 'form', event: @event %>
+    </div>
+  </div>
+</div>

@@ -15,6 +15,7 @@
 @import "bootstrap";
 @import "welcome";
 @import "navbar";
+@import "font-awesome-sprockets";
 @import "font-awesome";
 
 
@@ -37,4 +38,9 @@ main{
 
 #signup-form{
   margin-top: 5%;
+}
+
+.new-button{
+  margin-top: 1%;
+  margin-bottom: 2%;
 }

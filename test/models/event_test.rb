@@ -14,6 +14,20 @@ class EventTest < ActiveSupport::TestCase
     assert_includes new_event.errors, :end_date
   end
 
+  test "should valid if it is finished" do
+    # not tested the case which end_date = DateTime.current because when compare end_date and DateTime.current
+    # in #finished? fails due to DateTime.current is greater than end_date in the initialize moment
+    assert @event1.finished?
+    assert_not @event2.finished?
+  end
+
+  test "should valid if it is currently" do
+    currently_event = Event.new(title: 'new event', start_date: DateTime.current - 1.hours, end_date: DateTime.current + 1.hours, artist: artists(:artist3))
+    assert currently_event.currently?
+    currently_event.start_date = DateTime.current
+    assert currently_event.currently?
+  end
+
   test "should valid audience amount" do
     assert_equal @event1.audience_amount, 2
     assert_equal @event3.audience_amount, 0
@@ -31,7 +45,7 @@ class EventTest < ActiveSupport::TestCase
     assert_equal @event1.audience_amount, 2
   end
 
-  test "should valid is favourite for" do
+  test "should valid is favourite for a fan" do
     assert @event1.is_favourite_for? fans(:fan1)
     assert_not @event2.is_favourite_for? fans(:fan2)
   end

@@ -1,10 +1,15 @@
 class EventsController < ApplicationController
+
+  before_action :authenticate_user! , :authenticate_artist!
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_artist, except: [:show]
 
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @all_events = Event.all
+    @past_events = @all_events.collect {|e| e.finished?}
+    @next_events = @all_events - @past_events
   end
 
   # GET /events/1
@@ -25,14 +30,12 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
-
+    @event.artist = @artist
     respond_to do |format|
       if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render :show, status: :created, location: @event }
+        format.html { redirect_to artist_event_path(@artist, @event), notice: 'Event was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -42,11 +45,9 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
-        format.json { render :show, status: :ok, location: @event }
+        format.html { redirect_to artist_event_path(@artist, @event), notice: 'Event was successfully updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,8 +57,7 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     respond_to do |format|
-      format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to artist_events_url(@artist), notice: 'Event was successfully destroyed.' }
     end
   end
 
@@ -67,8 +67,16 @@ class EventsController < ApplicationController
       @event = Event.find(params[:id])
     end
 
+    def set_artist
+      @artist = current_user.profile
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :description, :place, :start_date, :end_date, :artist_id)
+      params.require(:event).permit(:title, :description, :place, :start_date, :end_date)
+    end
+
+    def authenticate_artist!
+      redirect_to(new_user_session_path) unless current_user.profile_type == "Artist"
     end
 end
