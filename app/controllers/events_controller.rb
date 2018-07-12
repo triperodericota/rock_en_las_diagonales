@@ -1,8 +1,10 @@
 class EventsController < ApplicationController
 
-  before_action :authenticate_user! , :authenticate_artist!
+  before_action :authenticate_user!
+  before_action :authenticate_artist! , except: [:show, :index]
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action :set_artist, except: [:show]
+  before_action :set_artist, except: [:show, :index]
+  before_action :is_favourite?, only: [:show]
 
   # GET /events
   # GET /events.json
@@ -78,5 +80,11 @@ class EventsController < ApplicationController
 
     def authenticate_artist!
       redirect_to(new_user_session_path) unless current_user.profile_type == "Artist"
+    end
+
+    def is_favourite?
+      if current_user.fan?
+        @is_favourite = current_user.profile.is_assistant_for? @event
+      end
     end
 end

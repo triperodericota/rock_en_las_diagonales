@@ -4,13 +4,15 @@
       <li class="list-group-item justify-content-between">
         <div class="row">
           <div class="col-md-8"><%= link_to event.title, artist_event_path(@artist,event) %></div>
-          <div class="col-md-2">
-            <%= link_to(icon('far', 'edit', 'Editar'), edit_artist_event_path(@artist, event), class: 'btn btn-success') %>
-          </div>
-          <div class="col-md-2">
-            <%= link_to(icon('far', 'trash-alt', 'Eliminar'), artist_event_path(@artist,event), method: :delete,
-                        class: 'btn btn-danger', data: { confirm: 'Desea eliminar la evaluacion?' }) %>
-           </div>
+          <% if current_user.artist? %>
+            <div class="col-md-2">
+              <%= link_to(icon('far', 'edit', 'Editar'), edit_artist_event_path(@artist, event), class: 'btn btn-success') %>
+            </div>
+            <div class="col-md-2">
+              <%= link_to(icon('far', 'trash-alt', 'Eliminar'), artist_event_path(@artist,event), method: :delete,
+                          class: 'btn btn-danger', data: { confirm: 'Desea eliminar la evaluacion?' }) %>
+            </div>
+          <% end %>
         </div>
       </li>
     <% end %>

@@ -1,10 +1,8 @@
 class ArtistsController < ApplicationController
 
-  before_action :authenticate_user!, :authenticate_artist
-
-  before_action :new_registration, only: [:new, :create]
-
-  before_action :set_artist, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :set_artist
+  before_action :is_follower?, only: [:show]
 
   # GET /artists
   # GET /artists.json
@@ -15,30 +13,8 @@ class ArtistsController < ApplicationController
   # GET /artists/1
   # GET /artists/1.json
   def show
+    @events = @artist.next_events
   end
-
-  # GET /artists/new
-#  def new
-#    @artist = Artist.new
-#    @user = @artist.build_user
-#  end
-
-  # GET /artists/1/edit
-#  def edit
-#  end
-
-
-  # PATCH/PUT /artists/1
-  # PATCH/PUT /artists/1.json
-#  def update
-#    respond_to do |format|
-#      if @artist.update(artist_params)
-#        format.html { redirect_to @artist, notice: 'Artist was successfully updated.' }
-#      else
-#        format.html { render :edit }
-#      end
-#    end
-#  end
 
   # DELETE /artists/1
   # DELETE /artists/1.json
@@ -52,7 +28,7 @@ class ArtistsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_artist
-      @artist = Artist.find(params[:name])
+      @artist = Artist.find_by(name: params[:name])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -60,12 +36,8 @@ class ArtistsController < ApplicationController
       params.require(:artist).permit(:name, :description)
     end
 
-    def new_registration
-      redirect_to(root_path) if user_signed_in?
-    end
-
-    def authenticate_artist
-      redirect_to(new_user_session_path) unless current_user.profile_type == "Artist"
+    def is_follower?
+      @is_follower = current_user.profile.following? @artist if current_user.fan?
     end
 
 end
