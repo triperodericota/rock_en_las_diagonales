@@ -1,36 +1,21 @@
 <% if user_signed_in? %>
   <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Profile">
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Perfil">
       <%= link_to edit_user_registration_path, class: 'nav-link' do %>
         <%= icon('far', 'user-circle') %>
         <span class="nav-link-text"><%= current_user.username %></span>
+      <% end  %>
+    </li>
+    <% if current_user.artist? %>
+      <%= render 'layouts/artist_menu' %>
+    <% else %>
+      <%= render 'layouts/fan_menu' %>
+    <% end %>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Cerrar sesión">
+      <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link' do %>
+        <%= icon('fas','sign-out-alt') %>
+        <span class="nav-link-text">Cerrar sesi&oacuten</span>
       <% end %>
-    </li>
-    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Events">
-      <%= link_to artist_events_path(current_user.profile_id), class: 'nav-link' do %>
-        <%= icon('far', 'calendar-alt') %>
-        <span class="nav-link-text">Mis eventos</span>
-      <% end %>
-    </li>
-    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Events">
-     <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-        <i class="fa fa-calendar"></i>
-        <span class="nav-link-text">Mis eventos</span>
-     </a>
-      <ul class="sidenav-second-level collapse" id="collapseComponents">
-        <li>
-          <a href="navbar.html">Navbar</a>
-        </li>
-        <li>
-          <a href="cards.html">Cards</a>
-        </li>
-      </ul>
-    </li>
-    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-      <a class="nav-link" href="#">
-        <i class="fa fa-fw fa-link"></i>
-        <span class="nav-link-text">Link</span>
-      </a>
     </li>
   </ul>
   <ul class="navbar-nav sidenav-toggler">

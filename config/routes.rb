@@ -1,21 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :artists, param: :name, only: [:index, :show, :destroy ] do
-    resources :events, only: [:new, :create, :destroy, :edit, :update]
-    member do
-      post 'follow', to: 'fans#follow_artist'
-      post  'unfollow', to: 'fans#unfollow_artist'
-    end
-  end
-  resources :events, only: [:show, :index] do
-    member do
-      post 'add_event', to: 'fans#add_event', as: 'add_artist'
-      post 'remove_event', to: 'fans#remove_event', as: 'remove_artist'
-    end
-  end
-
-  resources :fans, only: [:index, :show, :destroy]
-
   devise_scope :user do
     get 'signup/(:type)', to: 'user/registrations#new', as: 'signup'
   end
@@ -24,5 +8,26 @@ Rails.application.routes.draw do
              path_names: { edit: 'profile', sign_in: 'login', sign_out: 'logout' }
 
   get 'welcome/index'
+  get 'search', to: 'welcome#search'
+
+  resources :artists, param: :name, only: [:index, :show, :destroy ] do
+    resources :events do
+      member do
+        post 'add_event', to: 'fans#add_event', as: 'add'
+        post 'remove_event', to: 'fans#remove_event', as: 'remove'
+      end
+    end
+    member do
+      post 'follow', to: 'fans#follow_artist'
+      post  'unfollow', to: 'fans#unfollow_artist'
+    end
+  end
+
+  resources :fans, only: [:index, :show, :destroy] do
+    member do
+      get 'my_events'
+    end
+  end
+
   root to: 'welcome#index'
 end

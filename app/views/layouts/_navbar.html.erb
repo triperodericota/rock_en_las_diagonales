@@ -6,30 +6,24 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarResponsive">
     <%= render partial: 'layouts/user_menu' %>
-    <ul class="navbar-nav ml-auto">
 
-      <!--
-      <li class="nav-item">
-        <form class="form-inline my-2 my-lg-0 mr-lg-2">
-          <div class="input-group">
-            <input class="form-control" type="text" placeholder="Search for...">
-            <span class="input-group-append">
-              <button class="btn btn-primary" type="button">
-                <i class="fa fa-search"></i>
-              </button>
-            </span>
-          </div>
-        </form>
-      </li> -->
-      <% if user_signed_in? %>
+    <ul class="navbar-nav ml-auto">
+      <% if !user_signed_in? %>
         <li class="nav-item">
-          <%= link_to 'Cerrar sesión', destroy_user_session_path, method: :delete, class: 'btn btn-outline-success my-2 my-sm-0' %>
-          <!-- <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa fa-fw fa-sign-out"></i>Logout</a> -->
+          <%= render partial: 'user/sessions/new' %>
         </li>
       <% else %>
         <li class="nav-item">
-          <%= render partial: 'user/sessions/new' %>
+          <%= form_tag(search_path, method: :get, class: 'form-inline my-2 my-lg-0 mr-lg-2') do %>
+            <div class="input-group">
+              <%= text_field_tag :model, params[:model], placeholder: 'Buscar...', class: 'form-control' %>
+              <span class="input-group-append">
+                <%= button_tag class: 'btn btn-primary' do %>
+                  <%= icon('fas', 'search') %>
+                <% end %>
+              </span>
+            </div>
+          <% end %>
         </li>
       <% end %>
     </ul>

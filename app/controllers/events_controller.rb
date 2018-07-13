@@ -1,35 +1,32 @@
 class EventsController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :authenticate_artist! , except: [:show, :index]
+  before_action :authenticate_artist! , except: [:show, :index, :all_events]
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action :set_artist, except: [:show, :index]
+  before_action :set_artist
   before_action :is_favourite?, only: [:show]
 
-  # GET /events
-  # GET /events.json
+  # GET /artists/:artist_name/events
   def index
-    @all_events = Event.all
+    @all_events = @artist.events
     @past_events = @all_events.collect {|e| e.finished?}
     @next_events = @all_events - @past_events
   end
 
-  # GET /events/1
-  # GET /events/1.json
+  # GET /artists/:artist_name/events/1
   def show
   end
 
-  # GET /events/new
+  # GET /artists/:artist_name/events/new
   def new
     @event = Event.new
   end
 
-  # GET /events/1/edit
+  # GET artists/:artist_nameevents/1/edit
   def edit
   end
 
-  # POST /events
-  # POST /events.json
+  # POST /artists/:artist_name/events
   def create
     @event = Event.new(event_params)
     @event.artist = @artist
@@ -42,8 +39,7 @@ class EventsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /events/1
-  # PATCH/PUT /events/1.json
+  # PATCH/PUT /artists/:artist_nameevents/1
   def update
     respond_to do |format|
       if @event.update(event_params)
@@ -54,13 +50,17 @@ class EventsController < ApplicationController
     end
   end
 
-  # DELETE /events/1
-  # DELETE /events/1.json
+  # DELETE /artists/:artist_name/events/1
   def destroy
     @event.destroy
     respond_to do |format|
       format.html { redirect_to artist_events_url(@artist), notice: 'Event was successfully destroyed.' }
     end
+  end
+
+  # GET /events
+  def all_events
+    @events = Event.all
   end
 
   private
@@ -79,7 +79,7 @@ class EventsController < ApplicationController
     end
 
     def authenticate_artist!
-      redirect_to(new_user_session_path) unless current_user.profile_type == "Artist"
+      redirect_to(new_user_session_path) unless current_user.profile_type == "artist"
     end
 
     def is_favourite?

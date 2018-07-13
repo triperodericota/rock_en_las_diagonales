@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+
+      <% if @any_result %>
+        <h2>Resultados de la b&uacutesqueda </h2>
+      <% else %>
+        <h2>Lo sentimos, no encontramos ning&uacuten resultado para <%= params[:model] %></h2>
+      <% end %>
+
+      <% if @artists.any? %>
+        <div class="card">
+          <div class="card-header">
+            <%= icon('fas', 'user-friends', 'Artistas') %>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <% @artists.each do |artist| %>
+                <li class="list-group-item list-group-item-action">
+                  <%= link_to artist.name, artist_path(artist) %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+
+      <% if @events.any? %>
+        <div class="card">
+          <div class="card-header">
+            <%= icon('far', 'calendar-alt', 'Eventos') %>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <% @events.each do |event| %>
+                <li class="list-group-item list-group-item-action">
+                  <%= link_to event.title , artist_event_path(event.artist, event) %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

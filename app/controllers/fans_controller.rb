@@ -29,16 +29,23 @@ class FansController < ApplicationController
     end
   end
 
+  # GET /fans/:id/my_events
+  def my_events
+    @all_events = @fan.events
+    @past_events = @all_events.collect {|e| e.finished?}
+    @next_events = @all_events - @past_events
+  end
+
   # POST /events/:id/add_event
   def add_event
     @fan.events << @event unless @fan.is_assistant_for? @event
-    redirect_to @event
+    redirect_to artist_event_path(@event.artist.name,@event)
   end
 
   # POST /events/:id/remove_event
   def remove_event
     @fan.events.destroy(@event) if @fan.is_assistant_for? @event
-    redirect_to @event
+    redirect_to artist_event_path(@event.artist.name,@event)
   end
 
   # POST /artists/:name/follow
