@@ -1,7 +1,13 @@
-<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Events">
+<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Eventos">
   <%= link_to my_events_fan_path(current_user.profile_id), class: 'nav-link' do %>
     <%= icon('far', 'calendar-alt') %>
-    <span class="nav-link-text">Mis eventos</span>
+    <span class="nav-link-text">Eventos</span>
+  <% end %>
+</li>
+<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Artistas">
+  <%= link_to followed_artists_fan_path(current_user.profile_id), class: 'nav-link' do %>
+    <%= icon('fas', 'users') %>
+    <span class="nav-link-text">Artistas</span>
   <% end %>
 </li>
 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Events">

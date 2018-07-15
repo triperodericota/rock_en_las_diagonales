@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :fans, only: [:index, :show, :destroy] do
     member do
       get 'my_events'
+      get 'followed_artists'
     end
   end
 

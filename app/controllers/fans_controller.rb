@@ -34,6 +34,12 @@ class FansController < ApplicationController
     @all_events = @fan.events
     @past_events = @all_events.collect {|e| e.finished?}
     @next_events = @all_events - @past_events
+    @other_events = Event.all - @all_events
+  end
+
+  # GET /fans/:id/followed_artists
+  def followed_artists
+    @followed_artists = @fan.artists.to_enum
   end
 
   # POST /events/:id/add_event

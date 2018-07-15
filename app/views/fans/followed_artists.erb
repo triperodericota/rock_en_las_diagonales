@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Artistas</h2>
+    </div>
+  </div>
+  <div class="row">
+  <% i = 0
+    loop do %>
+
+      <div class="col-lg-4">
+        <% artist = @followed_artists.next %>
+        <!-- artist's photo
+         image_tag(artist.path_to_photo,size: '140x140', class: 'rounded-circle')   -->
+        <h4><%= link_to artist.name, artist_path(artist.name) %></h4>
+        <small><%= artist.amount_of_followers.to_s << ' seguidores' %></small>
+      </div>
+
+      <% i+= 1
+        if (i.modulo 3).equal? 0 %>
+        </div>
+        <div>
+      <% end %>
+      <% if i.equal? @followed_artists.size %>
+        </div>
+      <% end %>
+  <% end %>
+</div>

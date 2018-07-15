@@ -16,9 +16,9 @@
     <div class="col-md-2">
       <% if current_user.fan? %>
         <% if @is_follower %>
-          <%= link_to 'Dejar de seguir', unfollow_artist_path(@artist), method: :post, class: 'btn btn-success follow-button' %>
+          <%= link_to 'Dejar de seguir', unfollow_artist_path(@artist), method: :post, class: 'btn btn-primary follow-button' %>
         <% else %>
-          <%= link_to 'Seguir artista', follow_artist_path(@artist), method: :post, class: 'btn btn-success follow-button' %>
+          <%= link_to 'Seguir artista', follow_artist_path(@artist), method: :post, class: 'btn btn-primary follow-button' %>
         <% end %>
       <% end %>
     </div>

@@ -5,9 +5,9 @@
         <div class="card-header">
           <% if current_user.fan? %>
             <% if @is_favourite %>
-              <%= link_to(icon('fas','star'), remove_artist_event_path(@event), method: :post) %>
+              <%= link_to(icon('fas','star'), remove_artist_event_path(@event), method: :post, title: 'Eliminar de favoritos') %>
             <% else %>
-              <%= link_to(icon('far','star'), add_artist_event_path(@event), method: :post) %>
+              <%= link_to(icon('far','star'), add_artist_event_path(@event), method: :post, title: 'Agregar a favoritos') %>
             <% end %>
           <% end %>
         </div>
