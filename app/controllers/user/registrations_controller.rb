@@ -117,9 +117,9 @@ class User::RegistrationsController < Devise::RegistrationsController
   #  If you have extra params to permit, append them to the sanitizer.
    def configure_account_update_params
      if current_user.fan?
-       devise_parameter_sanitizer.permit(:account_update, keys: [:username, fan: [:first_name, :last_name]])
+       devise_parameter_sanitizer.permit(:account_update, keys: [:username, :photo, fan: [:first_name, :last_name]])
      else
-       devise_parameter_sanitizer.permit(:account_update, keys: [:username, artist: [:name, :description]])
+       devise_parameter_sanitizer.permit(:account_update, keys: [:username, :photo, artist: [:name, :description]])
      end
 
    end

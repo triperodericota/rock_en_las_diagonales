@@ -1,14 +1,10 @@
 <%= stylesheet_link_tag params[:controller] %>
 
 <div class="container">
-  <div class="row">
-    <div class="col-md-3">
-      <!-- artist's photo
-        img_tag(@artist.photo , class: 'img-thumbnail rounded')
-      -->
-    </div>
-    <div class="col-md-9">
-      <h2><%= @artist.name %></h2>
+  <div class="card">
+    <%= image_tag(@artist.user.photo.cover.url, class: 'card-img') %>
+    <div class="card-img-overlay">
+      <h3 class="artist-title"><%= @artist.name %></h3>
     </div>
   </div>
   <div class="row">

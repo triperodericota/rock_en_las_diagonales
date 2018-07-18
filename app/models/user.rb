@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable
 
   belongs_to :profile, polymorphic: true
+  mount_uploader :photo, PhotoUploader
   validates_associated :profile
   validates :username, presence: true, length: { maximum: 20 }, uniqueness: true
 
