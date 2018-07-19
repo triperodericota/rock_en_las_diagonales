@@ -9,6 +9,7 @@
     <%= f.input :place, placeholder: 'Ingrese el lugar donde se desarrollará el evento' %>
     <%= f.input :start_date %>
     <%= f.input :end_date %>
+    <%= f.input :picture, as: :file, hint: 'Seleccione una imágen para la portada del evento', input_html: { class: 'filestyle' } %>
   </div>
 
   <div class="form-actions">

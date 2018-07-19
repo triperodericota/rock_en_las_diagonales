@@ -51,11 +51,15 @@ main{
 
 .date {
   width: 50px;
-  text-align: center;
+  display: inline-block;
 
   .day {
     font-size: 21px;
     line-height: 1.1em;
   }
   .month { font-size: 13px; }
+}
+
+.card-title.event-title {
+  display: inline-block;
 }

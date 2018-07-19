@@ -34,7 +34,7 @@ class FansController < ApplicationController
     @all_events = @fan.events
     @past_events = @all_events.collect {|e| e.finished?}
     @next_events = @all_events - @past_events
-    @other_events = Event.all - @all_events
+    @other_events = Event.where.has { start_date > DateTime.current } - @all_events
   end
 
   # GET /fans/:id/followed_artists

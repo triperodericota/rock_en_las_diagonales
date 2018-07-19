@@ -54,7 +54,7 @@ class EventTest < ActiveSupport::TestCase
     assert_equal @event1.how_much_time_is_left_to_start, 'Evento finalizado'
     new_event = Event.new(title: 'new event', start_date: (DateTime.tomorrow + 20.hours), end_date: (DateTime.tomorrow + 23.hours + 30.minutes), artist: artists(:artist3))
     hmt = ActiveSupport::Duration.build(new_event.start_date - DateTime.current)
-    assert_equal new_event.how_much_time_is_left_to_start, "Faltan #{hmt.parts.hours} horas y #{hmt.parts.minutes} minutos para el comienzo del evento"
+    assert_equal new_event.how_much_time_is_left_to_start, "Faltan 1 día, #{hmt.parts[:hours]} horas y #{hmt.parts[:minutes]} minutos para el comienzo del evento"
   end
 
 

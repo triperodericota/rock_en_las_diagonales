@@ -3,6 +3,7 @@ class Event < ApplicationRecord
   belongs_to :artist
   has_many :audiences
   has_many :fans, through: :audiences
+  mount_uploader :picture, PictureUploader
 
   validate :start_date_should_be_earlier_than_end_date
   validates_associated :artist
@@ -45,16 +46,17 @@ class Event < ApplicationRecord
     string = "Faltan "
     traduction =  {:years => 'años', :months => 'meses', :days => 'días', :hours => 'horas', :minutes => 'minutos'}
     aDuration.parts.delete(:seconds)
-    p aDuration
     aDuration.parts.each_pair do |unit_time, amount|
-      puts "unit_time = #{unit_time}"
-      puts "amount = #{amount}"
-      string << "#{amount.to_s} " << "#{traduction[unit_time]},"
+      string << "#{amount.to_s} " << "#{traduction[unit_time]}, "
+      string.gsub!(traduction[unit_time],traduction[unit_time].singularize) if amount.equal? 1
     end
-    string << " para el comienzo del evento"
-    p string
-    str_match = string.split(/,(\d+)\s(\w+),/)
-    p str_match
+    string << "para el comienzo del evento"
+    string.gsub!(/,\s(\d+)\s(\w+), para /) do |s|
+      s.delete! ','
+      s.prepend ' y'
+      s.delete! ','
+      s
+    end
   end
 
 end

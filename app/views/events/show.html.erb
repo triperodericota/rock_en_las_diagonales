@@ -11,10 +11,8 @@
             <% end %>
           <% end %>
         </div>
+        <%= image_tag(@event.picture.cover.url) %>
         <div class="card-body">
-          <!-- event image
-            image_tag(@event.path_to_image, class: "card-img-top")
-           -->
           <h2 class="card-title"><%= @event.title %></h2>
           <h5>Organizado por <%= link_to @event.artist.name, artist_path(@event.artist) %></h5>
           <ul class="list-group list-group-flush">
@@ -23,8 +21,11 @@
               <span><%= @event.place %></span>
             </li>
             <li class="list-group-item list-group-item-action">
-              <%= icon('far', 'clock') %>
-              <span><%= @event.start_date.to_s(:long_ordinal) %> - <%= @event.end_date.to_s(:long_ordinal) %></span>
+              <div>
+                <%= icon('far', 'clock') %>
+                <span><%= @event.start_date.to_s(:long_ordinal) %> - <%= @event.end_date.to_s(:long_ordinal) %></span>
+              </div>
+              <p><small><%= @event.how_much_time_is_left_to_start %></small></p>
             </li>
             <li class="list-group-item list-group-item-action">
               <%= icon('fas','info-circle') %>

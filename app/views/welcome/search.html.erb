@@ -34,7 +34,11 @@
             <ul class="list-group list-group-flush">
               <% @events.each do |event| %>
                 <li class="list-group-item list-group-item-action">
-                  <%= link_to event.title , artist_event_path(event.artist, event) %>
+                  <span class="date">
+                    <div class="day"><%= event.start_date.strftime('%d') %></div>
+                    <div class="month"><%= event.start_date.strftime('%^b ') %></div>
+                  </span>
+                  <%= link_to event.title , artist_event_path(event.artist, event), class: 'event-title' %>
                 </li>
               <% end %>
             </ul>

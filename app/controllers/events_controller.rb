@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :authenticate_artist! , except: [:show, :index, :all_events]
+  before_action :authenticate_artist! , except: [:show]
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :set_artist
   before_action :is_favourite?, only: [:show]
@@ -9,7 +9,7 @@ class EventsController < ApplicationController
   # GET /artists/:artist_name/events
   def index
     @all_events = @artist.events
-    @past_events = @all_events.collect {|e| e.finished?}
+    @past_events = @all_events.select {|e| e.finished?}
     @next_events = @all_events - @past_events
   end
 
@@ -22,7 +22,7 @@ class EventsController < ApplicationController
     @event = Event.new
   end
 
-  # GET artists/:artist_nameevents/1/edit
+  # GET artists/:artist_name/1/edit
   def edit
   end
 
@@ -58,10 +58,6 @@ class EventsController < ApplicationController
     end
   end
 
-  # GET /events
-  def all_events
-    @events = Event.all
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -75,11 +71,11 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :description, :place, :start_date, :end_date)
+      params.require(:event).permit(:title, :description, :place, :start_date, :end_date, :picture)
     end
 
     def authenticate_artist!
-      redirect_to(new_user_session_path) unless current_user.profile_type == "artist"
+      redirect_to(new_user_session_path) unless current_user.profile_type == "Artist"
     end
 
     def is_favourite?
