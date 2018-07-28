@@ -10,7 +10,7 @@
 
       <div class="col-lg-3 offset-1 ">
         <% artist = @followed_artists.next %>
-        <%= image_tag(artist.user.photo.mini.url, size: '100x100' ,class: 'rounded-circle') %>
+        <%= image_tag(user_image_path(artist.user), size: '100x100' ,class: 'rounded-circle') %>
         <h4><%= link_to artist.name, artist_path(artist.name) %></h4>
         <small><%= artist.amount_of_followers.to_s << ' seguidores' %></small>
       </div>
@@ -18,7 +18,7 @@
       <% i+= 1
         if (i.modulo 3).equal? 0 %>
         </div>
-        <div>
+        <div class="row">
       <% end %>
       <% if i.equal? @followed_artists.size %>
         </div>

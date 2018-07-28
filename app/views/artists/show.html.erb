@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class="card">
-    <%= image_tag(@artist.user.photo.cover.url) %>
+    <%= image_tag(user_image_path(@artist.user)) %>
     <div class="card-img-overlay">
       <h3 class="artist-title"><%= @artist.name %></h3>
     </div>

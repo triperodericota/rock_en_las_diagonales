@@ -3,7 +3,7 @@ class Event < ApplicationRecord
   belongs_to :artist
   has_many :audiences
   has_many :fans, through: :audiences
-  mount_uploader :picture, PictureUploader
+  mount_uploader :picture, EventPictureUploader
 
   validate :start_date_should_be_earlier_than_end_date
   validates_associated :artist

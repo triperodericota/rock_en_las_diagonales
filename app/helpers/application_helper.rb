@@ -18,5 +18,9 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
+  def user_image_path(anUser)
+    anUser.photo.user_mini.url || anUser.photo.url
+  end
+
 end
 

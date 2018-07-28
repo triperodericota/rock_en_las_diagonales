@@ -1,7 +1,13 @@
-<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Events">
+<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Eventos">
   <%= link_to artist_events_path(current_user.profile_id), class: 'nav-link' do %>
     <%= icon('far', 'calendar-alt') %>
     <span class="nav-link-text">Mis eventos</span>
+  <% end %>
+</li>
+<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Productos">
+  <%= link_to artist_products_path(current_user.profile_id), class: 'nav-link' do %>
+    <%= icon('fas', 'shopping-cart') %>
+    <span class="nav-link-text">Mis productos</span>
   <% end %>
 </li>
 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Events">

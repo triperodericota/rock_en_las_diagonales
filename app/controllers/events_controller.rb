@@ -6,6 +6,7 @@ class EventsController < ApplicationController
   before_action :set_artist
   before_action :is_favourite?, only: [:show]
 
+
   # GET /artists/:artist_name/events
   def index
     @all_events = @artist.events
@@ -39,7 +40,7 @@ class EventsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /artists/:artist_nameevents/1
+  # PATCH/PUT /artists/:artist_name/events/1
   def update
     respond_to do |format|
       if @event.update(event_params)
@@ -65,18 +66,11 @@ class EventsController < ApplicationController
       @event = Event.find(params[:id])
     end
 
-    def set_artist
-      @artist = current_user.profile
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
       params.require(:event).permit(:title, :description, :place, :start_date, :end_date, :picture)
     end
 
-    def authenticate_artist!
-      redirect_to(new_user_session_path) unless current_user.profile_type == "Artist"
-    end
 
     def is_favourite?
       if current_user.fan?

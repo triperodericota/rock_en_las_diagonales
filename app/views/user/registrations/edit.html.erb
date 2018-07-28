@@ -35,7 +35,11 @@
         </div>
       </div>
       <div class="col-md-4 text-center">
-        <%= image_tag(resource.photo.thumb.url, class: 'rounded-circle') %>
+        <% if resource.photo.file.nil? %>
+          <%= image_tag(resource.photo.url, class: 'rounded-circle') %>
+        <% else %>
+          <%= image_tag(resource.photo.user_thumb.url, class: 'rounded-circle') %>
+        <% end %>
         <%= f.input :photo, as: :file, input_html:{ class: 'filestyle' } %>
       </div>
 

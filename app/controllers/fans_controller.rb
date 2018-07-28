@@ -92,8 +92,4 @@ class FansController < ApplicationController
       @artist = Artist.find_by(name: params[:name])
     end
 
-    def authenticate_fan!
-      redirect_to(new_user_session_path) unless current_user.profile_type == "Fan"
-    end
-
 end

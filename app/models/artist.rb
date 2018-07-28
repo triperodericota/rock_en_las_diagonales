@@ -4,6 +4,7 @@ class Artist < ApplicationRecord
   accepts_nested_attributes_for :user
   has_and_belongs_to_many :fans
   has_many :events, dependent: :destroy
+  has_many :products
 
   validates :name, length: { maximum: 30 }, presence: true, uniqueness: true
 

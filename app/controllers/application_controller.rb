@@ -20,4 +20,18 @@ class ApplicationController < ActionController::Base
       end
   end
 
+  protected
+
+    def authenticate_fan!
+      redirect_to(new_user_session_path) unless current_user.profile_type == "Fan"
+    end
+
+    def authenticate_artist!
+      redirect_to(new_user_session_path) unless current_user.profile_type == "Artist"
+    end
+
+    def set_artist
+      @artist = current_user.profile
+    end
+
 end

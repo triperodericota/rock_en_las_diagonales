@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
   get 'search', to: 'welcome#search'
+  delete 'photos', to: 'photos#destroy'
 
   resources :artists, param: :name, only: [:index, :show, :destroy ] do
     resources :events do
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
       post 'follow', to: 'fans#follow_artist'
       post  'unfollow', to: 'fans#unfollow_artist'
     end
+    resources :products
   end
 
   resources :fans, only: [:index, :show, :destroy] do

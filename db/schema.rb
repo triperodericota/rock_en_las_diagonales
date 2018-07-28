@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_18_160901) do
+ActiveRecord::Schema.define(version: 2018_07_26_011018) do
 
   create_table "artists", force: :cascade do |t|
     t.text "description"
@@ -51,6 +51,25 @@ ActiveRecord::Schema.define(version: 2018_07_18_160901) do
     t.string "last_name", limit: 25, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.integer "product_id"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_photos_on_product_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "title", limit: 50, null: false
+    t.text "description"
+    t.decimal "price", precision: 10, scale: 2, default: "0.0", null: false
+    t.integer "stock", default: 0, null: false
+    t.integer "artist_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_id"], name: "index_products_on_artist_id"
   end
 
   create_table "users", force: :cascade do |t|
