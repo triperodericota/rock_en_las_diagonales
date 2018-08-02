@@ -2,10 +2,11 @@ class PhotosController < ApplicationController
 
 
   def destroy
-    @image = Image.find(params[:id])
-    @image.destroy
+    @photo = Photo.find(params[:id])
+    @product = @photo.product
+    @photo.destroy
     respond_to do |format|
-      format.html { redirect_to :back, notice: 'Image has been deleted' }
+      format.html { redirect_back fallback_location: edit_artist_product_url(@product.artist, @product), notice: 'Image has been deleted' }
     end
   end
 

@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   before_action :authenticate_artist!, except: [:show]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :set_artist
-  before_action :photos_enumerator, only: [:show, :edit]
+  before_action :photos_enumerator, only: [:show]
 
 
   # GET /artists/:artist_name/products
@@ -45,6 +45,7 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
+        update_photos
         format.html { redirect_to artist_products_path(@artist.name), notice: 'Product was successfully updated.' }
       else
         format.html { render :edit }
@@ -68,16 +69,33 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:title, :description, :photos, :price, :stock, photos_attributes: [ ])
+      params.require(:product).permit(:title, :description, :price, :stock, photos_attributes: [ ])
     end
 
     def create_photos
-      photos = params[:product][:photos_attributes]["0"]
+      photos = params[:product][:photos_attributes]
       if !photos.nil?
-        photos.each_pair do |number_photo, image|
-           if !image.nil?
-             Photo.create(product: @product, image: image)
+        photos.each_pair do |number_photo, photo|
+           if !photo.nil?
+             Photo.create(product: @product, image: photo["image"])
            end
+        end
+      end
+    end
+
+    def update_photos
+      photos = params[:product][:photos_attributes]
+      if !photos.nil?
+        photos.each_pair do |number_photo, photo|
+          # add new photo
+          if !photo.nil? && !photo.has_key?("id")
+            Photo.create(product: @product, image: photo["image"])
+          end
+          # update saved photo (change older by a new photo)
+          if !photo.nil? && photo.has_key?("id") && photo.has_key?("image")
+            Photo.destroy(photo["id"])
+            Photo.create(product: @product, image: photo["image"])
+          end
         end
       end
     end

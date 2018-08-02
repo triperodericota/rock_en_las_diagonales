@@ -1,0 +1,37 @@
+<%= stylesheet_link_tag params[:controller] %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+
+      <h1>Publicar producto</h1>
+
+      <%= simple_form_for([@artist,@product], html: { multipart: true }, defaults: { input_html: { class: 'form-control' }}) do |f| %>
+        <%= f.error_notification %>
+        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+        <%= render partial: 'common_inputs', locals: { f: f } %>
+
+        <%= f.simple_fields_for :photos do |photos_f| %>
+          <label>Fotos</label>
+          <ul class="photos-previewlist">
+            <% @product.max_photos_amount.times do |i| %>
+              <div class="photo-preview">
+                <%=photos_f.label "photo-#{i}" do %>
+                  <%= image_tag('add_photo_camera.png', id: "photo-preview-#{i}" ,size: '80x80', onclick: 'openDialog(event)') %>
+                <% end %>
+                <%= photos_f.input_field :image, id: ("photo-#{i}".to_sym), name: "product[photos_attributes][#{i}][image]" , onchange: "displayProductPhoto(event)" %>
+              </div>
+            <% end %>
+          </ul>
+        <% end %>
+
+        <div class="form-actions">
+          <%= f.submit 'Publicar', class: 'btn btn-success' %>
+          <%= link_to 'Cancelar', artist_products_path(@artist, @product), { class: 'btn btn-secondary', role: :button } %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

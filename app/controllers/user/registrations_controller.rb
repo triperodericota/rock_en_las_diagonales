@@ -61,12 +61,9 @@ class User::RegistrationsController < Devise::RegistrationsController
      prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
 
      user_params = account_update_params
+     user_params[:photo] = params[:photo]
      user_profile = current_user.profile_type.underscore
      user_type_params = user_params.delete(user_profile)
-
-     logger.debug "user_params = #{user_params}"
-     logger.debug "user_type_params = #{user_type_params}"
-     logger.debug "account_update_params = #{account_update_params}"
 
      profile_updated = resource.profile.update(user_type_params)
      resource_updated = update_resource(resource, user_params)

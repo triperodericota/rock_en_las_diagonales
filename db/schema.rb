@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_26_011018) do
+ActiveRecord::Schema.define(version: 2018_07_30_162506) do
 
   create_table "artists", force: :cascade do |t|
     t.text "description"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2018_07_26_011018) do
     t.integer "artist_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "max_photos_amount", default: 10
     t.index ["artist_id"], name: "index_products_on_artist_id"
   end
 

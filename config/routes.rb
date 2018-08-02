@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
   get 'search', to: 'welcome#search'
-  delete 'photos', to: 'photos#destroy'
+  delete 'photos/:id', to: 'photos#destroy', as: 'photo'
 
   resources :artists, param: :name, only: [:index, :show, :destroy ] do
     resources :events do

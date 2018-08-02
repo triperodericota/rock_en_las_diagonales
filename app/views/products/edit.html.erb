@@ -1,0 +1,48 @@
+<%= stylesheet_link_tag params[:controller] %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+
+      <h1>Editar producto</h1>
+
+      <%= simple_form_for([@artist,@product], html: { multipart: true }, defaults: { input_html: { class: 'form-control' }}) do |f| %>
+        <%= f.error_notification %>
+        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+        <%= render partial: 'common_inputs', locals: { f: f } %>
+        <%= f.simple_fields_for :photos do |photos_f| %>
+          <label>Fotos</label>
+          <ul class="photos-previewlist">
+            <% i = 0
+              @product.photos.each do |photo| %>
+              <div class="photo-preview">
+                <%= link_to(icon('far', 'trash-alt'), photo_path(photo), { role: :button, method: :delete }) %>
+                <label for=<%= "photo-#{i}" %>>
+                  <%= image_tag(photo.image.url, size:'80x80', id: "photo-preview-#{i}", onclick: 'openDialog(event)') %>
+                </label>
+                <%= photos_f.input_field :image, id: ("photo-#{i}".to_sym), name: "product[photos_attributes][#{i}][image]" , onchange: "displayProductPhoto(event)", value: photo.image %>
+                <% i+= 1 %>
+              </div>
+            <% end %>
+            <% (@product.max_photos_amount - @product.photos.size).times do %>
+              <div class="photo-preview">
+                <%=photos_f.label "photo-#{i}" do %>
+                  <%= image_tag('add_photo_camera.png', id: "photo-preview-#{i}" ,size: '80x80', onclick: 'openDialog(event)') %>
+                <% end %>
+                <%= photos_f.input_field :image, id: ("photo-#{i}".to_sym), name: "product[photos_attributes][#{i}][image]" , onchange: "displayProductPhoto(event)" %>
+                <% i+= 1 %>
+              </div>
+            <% end %>
+          </ul>
+        <% end %>
+
+        <div class="form-actions">
+          <%= f.submit 'Actualizar', class: 'btn btn-success' %>
+          <%= link_to 'Cancelar', artist_products_path(@artist, @product), { class: 'btn btn-secondary', role: :button } %>
+        </div>
+      <% end %>
+
+      </div>
+  </div>
+</div>
