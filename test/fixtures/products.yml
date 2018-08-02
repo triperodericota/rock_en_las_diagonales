@@ -1,19 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  description: MyText
-  photos: MyString
-  price: 
-  price: 
+product1:
+  title: GULP
+  description: Primer disco redondo
+  max_photos_amount: 10
+  price: 100
   stock: 1
-  artist: one
+  artist: artist2
 
-two:
-  title: MyString
-  description: MyText
-  photos: MyString
-  price: 
-  price: 
-  stock: 1
-  artist: two
+product2:
+  title: Oktubre
+  description: Segundo disco redondo
+  max_photos_amount: 10
+  price: 150,50
+  stock: 10
+  artist: artist2
