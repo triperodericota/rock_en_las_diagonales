@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2018-08-01 21:01:25
+  order: product1_purchase1
+  state: one
+
+two:
+  date: 2018-08-01 21:01:25
+  order: product1_purchase1
+  state: two

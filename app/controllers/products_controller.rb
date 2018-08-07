@@ -14,6 +14,7 @@ class ProductsController < ApplicationController
 
   # GET /artists/:artist_name/products/1
   def show
+    @order = Order.new(product: @product, units: 0)
   end
 
   # GET /artists/:artist_name/products/new

@@ -1,4 +1,5 @@
 <%= stylesheet_link_tag params[:controller] %>
+<%= javascript_include_tag params[:controller] %>
 
 <div class="container">
   <div class="row">
@@ -22,20 +23,15 @@
         <% end %>
       </div>
     </div>
-      <div class="col-md-4">
-        <h2><%= @product.title %></h2>
-        <% if !@product.in_stock? %>
-          <p id="without-stock"><%= @product.report_stock %></p>
-        <% end %>
-        <h1>$ <%= @product.price.round(2).to_s %></h1>
-        <br>
-        <!-- buttons for purchase
-          if current_user.fan?
+    <div class="col-md-4">
+      <h2><%= @product.title %></h2>
+      <p id="without-stock"><%= @product.report_stock %></p>
 
-
-          end
-        -->
-      </div>
+      <h1>$ <%= @product.price.round(2).to_s %></h1>
+      <hr>
+      <!-- form for order -->
+      <%= render partial:'order_form' %>
+    </div>
   </div>
   <div class="row">
     <div class="col-md-8">

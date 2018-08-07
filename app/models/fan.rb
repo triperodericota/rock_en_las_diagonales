@@ -5,6 +5,7 @@ class Fan < ApplicationRecord
   has_and_belongs_to_many :artists
   has_many :audiences
   has_many :events, through: :audiences
+  has_many :orders
 
   validates :first_name, presence: true, length: { maximum: 25 }
   validates :last_name, presence: true, length: { maximum: 25 }

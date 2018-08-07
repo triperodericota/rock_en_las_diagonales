@@ -22,5 +22,9 @@ module ApplicationHelper
     anUser.photo.user_mini.url || anUser.photo.url
   end
 
+  def artist_image_cover_path(anArtist)
+    anArtist.user.photo.cover.url || anArtist.user.photo.url
+  end
+
 end
 

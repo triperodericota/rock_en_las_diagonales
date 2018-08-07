@@ -1,0 +1,67 @@
+<div class="modal fade" id="payment-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ingres&aacute tus datos para la compra</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form data-toggle="validator" name="pagar"  method="post" role="form" class="form-block" >
+
+          <p> <input type="radio" name="card" id="2" checked> <img src="http://i.imgur.com/VnMJQ8k.png" alt="" class="img-rounded" /> </p>
+          <div class="form-group has-feedback">
+            <label for="name" class="control-label">Nombre: </label>
+            <input type="text" class="form-control" maxlength="20" pattern="^[A-z\s]+$" name="names" placeholder="Nombre" id="name" data-error-pattern="askdsadsa"   required>
+            <span class="glyphicon form-control-feedback " aria-hidden="true"></span>
+            <div class="help-block with-errors">El nombre que aparece en la tarjeta</div>
+          </div>
+
+          <div class="form-group has-feedback">
+            <label for="card" class="control-label">Numero de tarjeta: </label>
+            <input type="text" class="form-control" maxlength="19" name="num" pattern="^4\d{3}([\ \-]?)\d{4}\1\d{4}\1\d{4}$"  data-minlength="19"  placeholder="xxxx-xxxx-xxxx-xxxx" id="card"  data-minlength-error="Numero de tarjeta incompleto, faltan numeros (20)"  required>
+            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+            <div class="help-block with-errors">El numero de su tarjeta, separado por "-"</div>
+          </div>
+          <div class="form-group has-feedback">
+            <label for="pass" class="control-label">Codigo de seguridad: </label>
+            <input type="password" class="form-control" size="3" pattern="^[0-9]{1,}$" maxlength="3" data-minlength="3" name="pass" placeholder="***" id="pass" data-minlength-error="El cod. de seguridad debe tener 3 numeros"   required>
+            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+            <div class="help-block with-errors">Codido del reverso de su tarjeta </div>
+          </div>
+          <div class="form-group">
+            <label for="date" class="control-label">Fecha de vencimiento: </label>
+            <select name="month" class="btn btn-light" id="month">
+              <% ('01'..'12').each do |month| %>
+                <option ><%= month.to_s %></option>
+              <% end %>
+            </select>
+            <select name="year" class="btn btn-light " id="year">
+              <% (Time.now.year..Time.now.years_since(4).year).each do |year| %>
+                <option><%= year.to_s %></option>
+              <% end %>
+            </select>
+          </div>
+
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" id="terms" data-error="Debe estar seguro de pagar!" required>
+              Acepto los terminos y condiciones de "RedRock"
+            </label>
+            <div class="help-block with-errors">
+            </div>
+          </div>
+
+          <div class="alert alert-info form-group ">
+            Si tienes alguna duda puedes leer el <a href="#" class="alert-link">acuerdo legal</a> del sitio
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="submitOrderForm(event)">Pagar</button>
+      </div>
+    </div>
+  </div>
+</div>

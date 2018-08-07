@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+product1_purchase1:
+  product: one
+  fan: one
+  total_price: 0
+  units: 1
+  state: one
+
+product2_purchase1:
+  product: two
+  fan: two
+  total_price: 0
+  units: 1
+  state: one

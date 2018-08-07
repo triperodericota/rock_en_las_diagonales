@@ -1,7 +1,11 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# possibles order's states
+
+OrderState.delete_all
+AcceptedState.create(id: 1, name: 'Aceptada', description: 'La compra solicitada fue aceptada por el artista,
+ahora accuerda el pago con él')
+CancelledState.create(id: 2, name: 'Cancelada', description: 'La compra fue cancelada')
+DeliveredState.create(id: 3, name: 'Finalizado', description: 'La compra se cerró satisfactoriamente')
+InProgressState.create(id: 4, name: 'En progreso', description: 'La solicitud de compra fue enviada al artista. Espera que la acepte!')
+
+
+

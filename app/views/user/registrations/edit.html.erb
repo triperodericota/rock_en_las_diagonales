@@ -36,15 +36,16 @@
       </div>
       <div class="col-md-4 text-center">
         <% if resource.photo.file.nil? %>
-          <%= image_tag(resource.photo.url, class: 'rounded-circle') %>
+          <%= image_tag(resource.photo.url, class: 'rounded-circle profile-image', id: 'imagePreview') %>
         <% else %>
-          <%= image_tag(resource.photo.user_thumb.url, class: 'rounded-circle') %>
+          <%= image_tag(resource.photo.user_thumb.url, class: 'rounded-circle profile-image', id: 'imagePreview') %>
         <% end %>
-        <%= f.input :photo, as: :file, input_html:{ class: 'filestyle' } %>
+        <%= f.input :photo, as: :file, input_html: { class: 'filestyle', name: 'photo', id: 'photo', onchange: 'displayPhoto(event)' }, data: { placeholder: 'Sin imágen', buttonName: 'btn-primary', buttonText: 'Imagen'} %>
       </div>
 
       <div class="form-actions">
-        <%= f.button :submit, "Actualizar" %>
+        <%= f.button :submit, "Actualizar", class: 'btn btn-success' %>
+        <%= link_to 'Cancelar', root_path, { class: 'btn btn-secondary', role: :button } %>
       </div>
     <% end %>
 
@@ -53,7 +54,5 @@
 
     <p>Unhappy? <% link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
     -->
-    <% link_to "Back", :back %>
-
    </div>
 </div>
