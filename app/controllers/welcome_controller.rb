@@ -5,7 +5,10 @@ class WelcomeController < ApplicationController
 
   # GET /
   def index
-
+    @main_events = Audience.group("event_id").count.to_a.sort {|event1, event2| event2.second <=> event1.second}.take(3)
+    @main_events.collect! {|event| Event.find(event.first)}
+    @main_events = @main_events.to_enum
+    @main_artists = Artist.all.sample(3).to_enum
   end
 
   # GET /search
