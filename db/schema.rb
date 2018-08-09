@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_03_202908) do
+ActiveRecord::Schema.define(version: 2018_08_09_142854) do
 
   create_table "artists", force: :cascade do |t|
-    t.text "description"
+    t.text "description", default: "Por el momento no se tiene información acerca del artist"
     t.string "name", limit: 30
     t.index ["name"], name: "index_artists_on_name", unique: true
   end
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2018_08_03_202908) do
     t.integer "artist_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "picture"
+    t.string "photo"
     t.index ["artist_id"], name: "index_events_on_artist_id"
   end
 

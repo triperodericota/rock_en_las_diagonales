@@ -26,5 +26,9 @@ module ApplicationHelper
     anArtist.user.photo.cover.url || anArtist.user.photo.url
   end
 
+  def artist_image_cover_size(anArtist)
+    return '1084x270' if anArtist.user.photo.file.nil?
+  end
+
 end
 

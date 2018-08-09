@@ -11,10 +11,10 @@
             <% end %>
           <% end %>
         </div>
-        <% if @event.picture.file.nil? %>
-          <%= image_tag(@event.picture.url) %>
+        <% if @event.photo.file.nil? %>
+          <%= image_tag(@event.photo.url) %>
         <% else %>
-          <%= image_tag(@event.picture.cover.url) %>
+          <%= image_tag(@event.photo.cover.url) %>
         <% end %>
         <div class="card-body">
           <h2 class="card-title"><%= @event.title %></h2>

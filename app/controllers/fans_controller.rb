@@ -32,7 +32,7 @@ class FansController < ApplicationController
   # GET /fans/:id/my_events
   def my_events
     @all_events = @fan.events
-    @past_events = @all_events.collect {|e| e.finished?}
+    @past_events = @all_events.select {|e| e.finished?}
     @next_events = @all_events - @past_events
     @other_events = Event.where.has { start_date > DateTime.current } - @all_events
   end

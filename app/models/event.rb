@@ -3,7 +3,7 @@ class Event < ApplicationRecord
   belongs_to :artist
   has_many :audiences
   has_many :fans, through: :audiences
-  mount_uploader :picture, EventPictureUploader
+  mount_uploader :photo, EventPhotoUploader
 
   validate :start_date_should_be_earlier_than_end_date
   validates_associated :artist
@@ -44,7 +44,7 @@ class Event < ApplicationRecord
 
   def create_string_response(aDuration)
     string = "Faltan "
-    traduction =  {:years => 'años', :months => 'meses', :days => 'días', :hours => 'horas', :minutes => 'minutos'}
+    traduction =  {:years => 'años', :months => 'meses', :weeks => 'semanas', :days => 'días', :hours => 'horas', :minutes => 'minutos'}
     aDuration.parts.delete(:seconds)
     aDuration.parts.each_pair do |unit_time, amount|
       string << "#{amount.to_s} " << "#{traduction[unit_time]}, "
@@ -55,7 +55,7 @@ class Event < ApplicationRecord
       s.delete! ','
       s.prepend ' y'
       s.delete! ','
-      s
+      p s
     end
   end
 

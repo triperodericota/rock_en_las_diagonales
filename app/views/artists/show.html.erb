@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class="card bg-dark text-white">
-    <%= image_tag(artist_image_cover_path(@artist), class: 'card-img') %>
+    <%= image_tag(artist_image_cover_path(@artist), class: 'card-img', size: artist_image_cover_size(@artist)) %>
     <div class="card-img-overlay">
       <h3 class="artist-title"><%= @artist.name %></h3>
     </div>
