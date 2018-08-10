@@ -71,7 +71,6 @@ class EventsController < ApplicationController
       params.require(:event).permit(:title, :description, :place, :start_date, :end_date, :picture)
     end
 
-
     def is_favourite?
       if current_user.fan?
         @is_favourite = current_user.profile.is_assistant_for? @event

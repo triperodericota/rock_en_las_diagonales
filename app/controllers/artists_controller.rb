@@ -3,6 +3,7 @@ class ArtistsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_artist
   before_action :is_follower?, only: [:show]
+  before_action :authenticate_fan!, only: [:show, :index]
 
   # GET /artists
   # GET /artists.json
@@ -14,6 +15,7 @@ class ArtistsController < ApplicationController
   # GET /artists/1.json
   def show
     @events = @artist.next_events
+   @products = @artist.products
   end
 
   # DELETE /artists/1

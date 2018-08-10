@@ -1,0 +1,26 @@
+<ul class="list-group">
+  <% @products.each do |product| %>
+    <li class="list-group-item justify-content-between">
+      <div class="row">
+        <div class="col-md-5">
+          <%= link_to product.title, artist_product_path(product.artist.name, product), class: 'event-title' %>
+        </div>
+        <% if current_user.artist? %>
+          <div class="col-md-1">
+            <p>Stock: <%= product.stock %></p>
+          </div>
+          <div class="col-md-1">
+            <p>Price: $<%= product.price.round(2).to_s %></p>
+          </div>
+          <div class="col-md-2 offset-1">
+            <%= link_to(icon('far', 'edit', 'Editar'), edit_artist_product_path(@artist, product), class: 'btn btn-success') %>
+          </div>
+          <div class="col-md-2">
+            <%= link_to(icon('far', 'trash-alt', 'Eliminar'), artist_product_path(@artist,product), method: :delete,
+                        class: 'btn btn-danger', data: { confirm: 'Desea eliminar el producto?' }) %>
+          </div>
+        <% end %>
+      </div>
+    </li>
+  <% end %>
+</ul>

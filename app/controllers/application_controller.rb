@@ -12,11 +12,6 @@ class ApplicationController < ActionController::Base
         elsif params[:user][:artist]
             user.permit(:email, :password, :password_confirmation, :username, :user_type, artist: [:name, :description])
         end
-#          extra_params = extra_params.each {|param| param.to_s.to_sym }
-#          type = "#{type}_attributes"
-#          extra_params = { type => extra_params }
-#          logger.debug "type = #{type}"
-#          logger.debug "extra_params= #{extra_params}"
       end
   end
 

@@ -71,11 +71,6 @@ class FansController < ApplicationController
       @fan = current_user.profile
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def fan_params
-      params.fetch(:fan, {})
-    end
-
     def event_params
       params.permit(:id)
     end
