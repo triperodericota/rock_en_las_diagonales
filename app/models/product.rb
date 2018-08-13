@@ -6,7 +6,7 @@ class Product < ApplicationRecord
   accepts_nested_attributes_for :photos, allow_destroy: true
 
   validates_associated :artist
-  validates :title, presence: true, length: { maximum: 30 }
+  validates :title, presence: true, length: { maximum: 50 }
   validates :price, presence: true, length: { maximum: 10 }, numericality: { greater_than_or_equal_to: 0 }
   validates :stock, presence: true, length: { maximum: 10 }, numericality: { only_integer: true , greater_than_or_equal_to: 0 }
 

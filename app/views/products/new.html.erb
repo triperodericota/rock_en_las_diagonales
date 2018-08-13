@@ -11,6 +11,8 @@
         <%= f.error_notification %>
         <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
+        <%= render 'layouts/form_aclaration' %>
+
         <%= render partial: 'common_inputs', locals: { f: f } %>
 
         <%= f.simple_fields_for :photos do |photos_f| %>

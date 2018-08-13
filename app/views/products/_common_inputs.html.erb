@@ -1,7 +1,7 @@
 
 <div class="form-inputs">
-  <%= f.input :title, autofocus: true, placeholder: 'Ingrese el nombre o título del producto' %>
-  <%= f.input :description, placeholder: 'Ingrese una descripción del producto' %>
+  <%= f.input :title, autofocus: true, placeholder: 'Ingresá el nombre o título del producto', input_html: { maxlength: 50 } %>
+  <%= f.input :description, placeholder: 'Ingresá una descripción del producto. Especificá detalles del mismo' %>
   <%= f.input :price do %>
     <div class="input-group">
       <span class="input-group-prepend">
@@ -10,7 +10,7 @@
       <%= f.input_field :price, min: 0, step: 0.1, class: 'form-control' %>
     </div>
   <% end %>
-  <%= f.input :stock, placeholder: 'Ingrese la cantididad de unidades disponibles', input_html: { min: 0, step: 1 } %>
+  <%= f.input :stock, placeholder: 'Ingresá la cantididad de unidades disponibles', input_html: { min: 0, step: 1 } %>
 
 </div>
 

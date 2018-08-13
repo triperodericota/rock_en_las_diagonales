@@ -2,14 +2,15 @@
 <%= simple_form_for([@artist,@event], defaults: { input_html: { class: 'form-control' }}) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <%= render 'layouts/form_aclaration' %>
 
   <div class="form-inputs">
-    <%= f.input :title, required: true, autofocus: true, placeholder: 'Ingrese el título del evento' %>
-    <%= f.input :description, placeholder: 'Ingrese la información del evento para que sus seguidores puedan saber de que se trata!' %>
-    <%= f.input :place, placeholder: 'Ingrese el lugar donde se desarrollará el evento' %>
+    <%= f.input :title, required: true, autofocus: true, placeholder: 'Ingresá el título del evento', input_html: { maxlength: 40} %>
+    <%= f.input :description, placeholder: 'Ingresá la información del evento para que sus seguidores puedan saber de que se trata!' %>
+    <%= f.input :place, placeholder: 'Ingresá el lugar donde se desarrollará el evento', input_html: { maxlength: 50 } %>
     <%= f.input :start_date %>
     <%= f.input :end_date %>
-    <%= f.input :picture, as: :file, hint: 'Seleccione una imágen para la portada del evento', input_html: { class: 'filestyle' } %>
+    <%= f.input :photo, as: :file, hint: 'Seleccione una imágen para la portada del evento', input_html: { class: 'filestyle' } %>
   </div>
 
   <div class="form-actions">

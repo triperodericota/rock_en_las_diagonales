@@ -3,9 +3,9 @@
 
   <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-inline my-0"}) do |f| %>
 
-      <%= f.input :email, label: false,  placeholder: 'Ingrese su email', required: true, autofocus: true, input_html: { autocomplete: "email", class: 'form-control mb-2 mr-sm-2' } %>
+      <%= f.input :email, label: false,  placeholder: 'Ingresá tu email', required: true, autofocus: true, input_html: { autocomplete: "email", class: 'form-control mb-2 mr-sm-2' } %>
 
-      <%= f.input :password, label: false, placeholder: 'Ingrese su contraseña', required: true, input_html: { autocomplete: "current-password" }, input_html: { class: 'form-control mb-2 mr-sm-2' } %>
+      <%= f.input :password, label: false, placeholder: 'Ingresá tu contraseña', required: true, input_html: { autocomplete: "current-password" }, input_html: { class: 'form-control mb-2 mr-sm-2' } %>
 
       <%= f.input :remember_me, label: 'Recordar mis datos', input_html: { class: 'form-check-input' }, as: :boolean if devise_mapping.rememberable? %>
 

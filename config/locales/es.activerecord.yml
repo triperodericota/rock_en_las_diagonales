@@ -18,7 +18,7 @@ es:
         place: 'Lugar'
         start_date: 'Fecha y hora de inicio'
         end_date: 'Fecha y hora de cierre'
-        picture: 'Foto de portada'
+        photo: 'Foto de portada'
       product:
         title: 'Título'
         price: 'Precio'

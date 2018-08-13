@@ -10,7 +10,7 @@
             <p>Stock: <%= product.stock %></p>
           </div>
           <div class="col-md-1">
-            <p>Price: $<%= product.price.round(2).to_s %></p>
+            <p>Precio: $<%= product.price.round(2).to_s %></p>
           </div>
           <div class="col-md-2 offset-1">
             <%= link_to(icon('far', 'edit', 'Editar'), edit_artist_product_path(@artist, product), class: 'btn btn-success') %>

@@ -15,7 +15,7 @@
             </div>
             <div class="col-md-2">
               <%= link_to(icon('far', 'trash-alt', 'Eliminar'), artist_event_path(@artist,event), method: :delete,
-                          class: 'btn btn-danger', data: { confirm: 'Desea eliminar la evaluacion?' }) %>
+                          class: 'btn btn-danger', data: { confirm: "Estás seguro que quieres eliminar el evento #{event.title}?" }) %>
             </div>
           <% end %>
         </div>
