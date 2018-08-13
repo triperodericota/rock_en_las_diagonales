@@ -35,32 +35,26 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'sprockets', '~> 3.7.2'
-
 # Devise authentication
 gem 'devise', git: 'https://github.com/plataformatec/devise.git'
-
 # Bootstrap styles
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
-
 # Simple-form
 gem 'simple_form'
-
 # CanCan , authorization library
 gem 'cancancan', '~> 2.0'
-
 gem 'font-awesome-sass', '~> 5.0.13'
-
 # Squeel,lets write your Active Record queries with fewer strings
 gem 'baby_squeel'
-
 # image's processing
 gem "mini_magick"
 # simple way to upload files
 gem 'carrierwave', '~> 1.0'
-
 # generate fake data
 gem 'faker'
+# payments processing
+gem 'mercadopago-sdk'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

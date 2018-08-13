@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_09_142854) do
+ActiveRecord::Schema.define(version: 2018_08_11_005517) do
 
   create_table "artists", force: :cascade do |t|
-    t.text "description", default: "Por el momento no se tiene información acerca del artist"
+    t.text "description", default: ""
     t.string "name", limit: 30
     t.index ["name"], name: "index_artists_on_name", unique: true
   end

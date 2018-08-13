@@ -1,0 +1,26 @@
+es:
+  activerecord:
+    attributes:
+      user:
+        password: 'Contraseña'
+        password_confirmation: 'Confirmación de contraseña'
+        username: 'Nombre de usuario'
+        email: 'Correo electrónico'
+      fan:
+        first_name: 'Nombre'
+        last_name: 'Apellido'
+      artist:
+        name: 'Nombre'
+        description: 'Descripción'
+      event:
+        title: 'Título'
+        description: 'Descripción'
+        place: 'Lugar'
+        start_date: 'Fecha y hora de inicio'
+        end_date: 'Fecha y hora de cierre'
+        picture: 'Foto de portada'
+      product:
+        title: 'Título'
+        price: 'Precio'
+        description: 'Descripción'
+        photos: 'Fotos'

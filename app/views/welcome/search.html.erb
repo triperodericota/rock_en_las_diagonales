@@ -35,8 +35,8 @@
               <% @events.each do |event| %>
                 <li class="list-group-item list-group-item-action">
                   <span class="date">
-                    <div class="day"><%= event.start_date.strftime('%d') %></div>
-                    <div class="month"><%= event.start_date.strftime('%^b ') %></div>
+                    <div class="day"><%= l(event.start_date, format: '%d') %></div>
+                    <div class="month"><%= l(event.start_date, format: '%b').upcase %></div>
                   </span>
                   <%= link_to event.title , artist_event_path(event.artist, event), class: 'event-title' %>
                 </li>

@@ -5,8 +5,8 @@
         <div class="row">
           <div class="col-md-8">
             <span class="date">
-                <div class="day"><%= event.start_date.strftime('%d') %></div>
-                <div class="month"><%= event.start_date.strftime('%^b ') %></div>
+                <div class="day"><%= l(event.start_date, format: '%d') %></div>
+                <div class="month"><%= l(event.start_date, format: '%b ').upcase %></div>
               </span>
             <%= link_to event.title, artist_event_path(event.artist.name, event), class: 'event-title' %></div>
           <% if current_user.artist? %>

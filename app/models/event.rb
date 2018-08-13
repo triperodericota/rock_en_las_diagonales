@@ -13,7 +13,7 @@ class Event < ApplicationRecord
 
   def start_date_should_be_earlier_than_end_date
     if end_date <= start_date
-      errors.add(:end_date, "end_date can't be earlier than start_date")
+      errors.add(:end_date, "no puede ser anterior o igual a la fecha y hora de inicio")
     end
   end
 
