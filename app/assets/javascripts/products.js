@@ -26,3 +26,28 @@ function displayProductPhoto(event) {
     var output = document.getElementById('photo-preview-'.concat(photo_number.toString()));
     output.src = URL.createObjectURL(event.target.files[0]);
 }
+
+$(document).on("change", "#state", function(){
+    var state = $(this).val();
+    $.ajax({
+        url: "/show_cities",
+        method: "GET",
+        dataType: "json",
+        data: {state: state},
+        error: function (xhr, status, error) {
+            console.error('AJAX Error: ' + status + error);
+        },
+        success: function (response) {
+            console.log(response);
+            var cities = response["cities"];
+            $('#city').prop("disabled", false);
+            $("#city").empty();
+            $("#city").append('<option selected>Localidad</option>');
+            for(var i=0; i< cities.length; i++) {
+                console.log("city:".concat(cities[i].toString()));
+                $("#city").append('<option value="' + cities[i].toString() + '">' + cities[i].toString() + '</option>');
+            }
+        }
+    });
+});
+

@@ -57,6 +57,8 @@ gem 'faker'
 gem 'mercadopago-sdk'
 # save sensitive information
 gem 'figaro'
+# list cities in state
+gem 'city-state'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

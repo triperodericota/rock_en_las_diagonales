@@ -11,7 +11,7 @@
         <%= f.input :units, disabled: !disable, label: false, input_html: { min: 0, step: 1, class: 'form-control' } %>
       </div>
       <div class="col-sm-9 mb-3">
-        <%= link_to 'Comprar ahora', type: 'button', id: 'buy-button', class: 'btn btn-primary btn-block', disabled: !disable, data: { toggle: 'modal', target: '#payment-modal' } %>
+        <%= button_tag 'Comprar ahora', type: 'button', id: 'buy-button', class: 'btn btn-primary btn-block', disabled: !disable, data: { toggle: 'modal', target: '#payment-modal' } %>
       </div>
     </div>
     <%= render partial: 'payment_modal' %>

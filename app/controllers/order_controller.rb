@@ -2,6 +2,7 @@ class OrderController < ApplicationController
 
   before_action :set_product
   before_action :order_params
+  before_action :buyer_params, only:[:create]
   before_action :set_buyer, only: [:create]
 
 
@@ -36,6 +37,11 @@ class OrderController < ApplicationController
 
   def order_params
     params.require(:order).permit(:units)
+  end
+
+  def buyer_parms
+    p params
+    params.permit(:name, :surname, :dni, :phone, :state, :street_name, :street_number, :zip)
   end
 
   def set_buyer

@@ -19,6 +19,19 @@ class WelcomeController < ApplicationController
     @any_result = true unless @artists.empty? & @events.empty?
   end
 
+  def show_cities
+    if params[:state].present?
+      @cities = CS.cities(params[:state].to_sym, :AR)
+    end
+    if request.xml_http_request?
+      respond_to do |format|
+        format.json {
+          render json: {cities: @cities}
+        }
+      end
+    end
+  end
+
   private
 
   def search_params
