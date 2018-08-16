@@ -2,6 +2,7 @@ class Order < ApplicationRecord
 
   belongs_to :product
   belongs_to :fan
+  belongs_to :buyer
   belongs_to :state
   has_many :order_states
   has_many :states, through: :order_states

@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_11_005517) do
+ActiveRecord::Schema.define(version: 2018_08_16_012324) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "state", limit: 40, null: false
+    t.string "city", limit: 40, null: false
+    t.string "street_name", limit: 25, null: false
+    t.string "street_number", limit: 25, null: false
+    t.string "zip", limit: 5, null: false
+    t.string "apartament", limit: 5
+    t.integer "buyer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buyer_id"], name: "index_addresses_on_buyer_id"
+  end
 
   create_table "artists", force: :cascade do |t|
     t.text "description", default: ""
@@ -31,6 +44,19 @@ ActiveRecord::Schema.define(version: 2018_08_11_005517) do
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_audiences_on_event_id"
     t.index ["fan_id"], name: "index_audiences_on_fan_id"
+  end
+
+  create_table "buyers", force: :cascade do |t|
+    t.string "name", limit: 30, null: false
+    t.string "surname", limit: 30, null: false
+    t.integer "dni", limit: 8, null: false
+    t.string "phone_number", limit: 8
+    t.string "phone_cod_area", limit: 5
+    t.string "email", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dni"], name: "index_buyers_on_dni"
+    t.index ["email"], name: "index_buyers_on_email"
   end
 
   create_table "events", force: :cascade do |t|
@@ -71,6 +97,8 @@ ActiveRecord::Schema.define(version: 2018_08_11_005517) do
     t.integer "units", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "buyers_id"
+    t.index ["buyers_id"], name: "index_orders_on_buyers_id"
     t.index ["fan_id"], name: "index_orders_on_fan_id"
     t.index ["product_id"], name: "index_orders_on_product_id"
     t.index ["state_id"], name: "index_orders_on_state_id"
