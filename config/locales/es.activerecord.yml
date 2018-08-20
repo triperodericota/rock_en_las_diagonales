@@ -24,3 +24,16 @@ es:
         price: 'Precio'
         description: 'Descripción'
         photos: 'Fotos'
+      buyer:
+        name: 'Nombre'
+        surname: 'Apellido'
+        dni: 'DNI'
+        phone: 'Teléfono'
+        email: 'Correo electrónico'
+      address:
+        state: 'Provincia'
+        city: 'Localidad'
+        street_name: 'Calle'
+        street_number: 'Número'
+        zip: 'Código postal'
+        apartament: 'Departamento/Piso'

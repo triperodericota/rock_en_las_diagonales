@@ -1,0 +1,3 @@
+class ExpiredState < State
+
+end

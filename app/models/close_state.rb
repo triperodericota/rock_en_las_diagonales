@@ -1,0 +1,3 @@
+class CloseState < State
+
+end

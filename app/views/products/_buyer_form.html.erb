@@ -1,0 +1,81 @@
+<div class="modal fade" id="payment-modal" tabindex="-1" role="dialog" aria-labelledby="BuyerFormModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ingresa tus datos para la compra</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= render 'layouts/form_aclaration' %>
+
+        <%= f.error_notification %>
+        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+           <%= f.input :name, required: true, autofocus: true, placeholder: 'Carlos', input_html: { maxlength: 30, class: 'form-control' }, hint: 'El nombre que aparece en la tarjeta' %>
+          </div>
+          <div class="col-md-6 mb-3">
+            <%= f.input :surname, placeholder: 'Perez', input_html: { maxlength: 30, class: 'form-control' }, hint: 'El apellido que aparece en la tarjeta' %>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <%= f.input :dni, as: :string, required: true, placeholder: '11555666', input_html: { maxlength: 8, class: 'form-control' }, hint: 'El DNI del titular de la tarjeta' %>
+          </div>
+          <div class="col-md-6 mb-3">
+            <%= f.input :phone, placeholder: '0116548795', input_html: { maxlength: 13, class: 'form-control' }, hint: 'Ingresa el código de área seguido de tu número de teléfono sin el 15. Ej: 02215478745' %>
+          </div>
+        </div>
+
+        <h4>Queres recibir el producto en tu casa?</h4>
+
+        <%= f.simple_fields_for @order.buyer.address do |af| %>
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <%= af.input :state, label: 'Provincia', collection: CS.states(:AR).to_a, label_method: -> state {state[1]},
+                           value_method: -> state {state[0]} , prompt: 'Selecciona tu provincia', input_html: { class: 'custom-select', id: 'state' } %>
+            </div>
+            <div class="col-md-6 mb-3">
+              <%= af.input :city, as: :select, label: 'Localidad', disabled: true, prompt: 'Selecciona tu localidad', input_html: { class: 'custom-select', id: 'city' } %>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-3 mb-3">
+              <%= af.input :street_name, placeholder: '25 de mayo', input_html: { class: 'form-control', maxlength: 25 } %>
+            </div>
+            <div class="col-md-3 mb-3">
+              <%= af.input :street_number, placeholder: '222', input_html: { class: 'form-control', maxlength: 6 } %>
+            </div>
+            <div class="col-md-3 mb-3">
+              <%= af.input :apartament, input_html: { class: 'form-control', maxlength: 5 } %>
+            </div>
+            <div class="col-md-3 mb-3">
+              <%= af.input :zip, placeholder: '1896', input_html: { class: 'form-control', maxlength: 4 } %>
+            </div>
+          </div>
+
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" id="terms" data-error="Debe estar seguro de pagar!" required>
+              Acepto los terminos y condiciones de "RedRock"
+            </label>
+            <div class="help-block with-errors">
+            </div>
+          </div>
+
+          <div class="alert alert-info form-group ">
+            Si tienes alguna duda puedes leer el <a href="#" class="alert-link">acuerdo legal</a> del sitio
+          </div>
+
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="submitOrderForm(event)">Pagar</button>
+      </div>
+    </div>
+  </div>
+</div>

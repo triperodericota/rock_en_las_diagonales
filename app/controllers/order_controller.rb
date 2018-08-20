@@ -2,18 +2,58 @@ class OrderController < ApplicationController
 
   before_action :set_product
   before_action :order_params
-  before_action :buyer_params, only:[:create]
-  before_action :set_buyer, only: [:create]
   before_action :mercadopago_authentication, only: [:create]
 
   # POST /artists/:artist_name/products/:id/buy
   def create
-    @order = Order.new(order_params)
-    @order.product = @product
-    @order.fan = @buyer
-    main_photo = @product.photos.first.image.url || nil
+    @order = Order.new(units: params[:order][:units].to_i, product: @product)
+    @order.fan = current_user.profile
+    # take buyer and address params
+    buyer_params = order_params.delete(:buyer).except(:address)
+    address_params = order_params.delete(:buyer).delete(:address)
 
-    # mercadopago preference checkout
+    set_buyer(buyer_params)
+    @order.buyer = @buyer
+    # check if user load fields for home delivery
+    if @buyer.address.nil? && address_params.except(:apartament).values.all? {|v| !v.blank? }
+      @address = Address.new(address_params)
+      if @address.save
+        @buyer.address = @address
+        correct_address = true
+      else
+        correct_address = false
+      end
+    else
+      # without address for home delivery
+      correct_address = true
+    end
+
+    respond_to do |format|
+      byebug
+      if @order.save && @buyer.save && correct_address
+        create_checkout
+        redirect_to @preference["response"]["sandbox_init_point"]
+      else
+        flash[:error] = 'La operación no se pudo realizar, por favor revise los datos ingresados e intente nuevamente!'
+        format.html { redirect_back fallback_location: artist_product_url(@product.artist, @product) }
+      end
+    end
+  end
+
+  def cancel
+    @order.cancel
+  end
+
+  def accept
+    @order.accept
+  end
+
+  # mercadopago checkout
+  def create_checkout
+    main_photo = @product.photos.first.image.url || nil
+    street_name = @buyer.address.street_name unless @buyer.address.nil?
+    street_number = @buyer.address.street_number unless @buyer.address.nil?
+    zip = @buyer.address.zip unless @buyer.address.nil?
     @preferenceData = {
         "items": [
             { "id": @product.id,
@@ -26,42 +66,27 @@ class OrderController < ApplicationController
             }
         ],
         "payer":
-            { 	 "name": params[:name],
-                 "surname": params[:surname],
-                 "email": @buyer.user.email,
-                 "date_created": DateTime.current,
-                 "phone": {
-                     "area_code": params[:phone],
-                     "number": params[:phone]
-                 },
-                 "identification":
-                     {  "type": "DNI",
-                        "number": params[:dni]
-                     },
+            { 	 "name": @buyer.name,
+                "surname": @buyer.surname,
+                "email": @buyer.email,
+                "date_created": DateTime.current,
+                "phone": {
+                    "area_code": @buyer.phone_cod_area,
+                    "number": @buyer.phone_number
+                },
+                "identification":
+                    {  "type": "DNI",
+                       "number": @buyer.dni,
+                    },
                 "address":
-                    {   "street_name": params[:street_name],
-                        "street_number": params[:street_number],
-                        "zip_code": params[:zip]
+                    {   "street_name": street_name,
+                        "street_number": street_number,
+                        "zip_code": zip
                     }
 
             }
     }
     @preference = $mp.create_preference(@preferenceData)
-    #respond_to do |format|
-    #  if @order.save
-    #    format.html { redirect_to root_path }
-    #  else
-    #    format.html { redirect_back fallback_location: artist_product_url(@product.artist, @product) }
-    #  end
-    #end
-  end
-
-  def cancel
-    @order.cancel
-  end
-
-  def accept
-    @order.accept
   end
 
   private
@@ -71,16 +96,12 @@ class OrderController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:units)
+    params.require(:order).permit(:product, :units, buyer: [:name, :surname, :dni, :phone, address: [:state, :city, :street_name, :street_number, :apartament, :zip]])
   end
 
-  def buyer_params
-    p params
-    params.permit(:name, :surname, :dni, :phone, :state, :street_name, :street_number, :zip)
-  end
-
-  def set_buyer
-    @buyer = current_user.profile if current_user.fan?
+  def set_buyer(buyer_params)
+    @buyer = Buyer.find_by(dni: buyer_params[:dni]) || Buyer.new(buyer_params)
+    @buyer.email = current_user.email if @buyer.email.nil?
   end
 
 end

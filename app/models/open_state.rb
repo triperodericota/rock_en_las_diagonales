@@ -1,0 +1,3 @@
+class OpenState < State
+
+end
