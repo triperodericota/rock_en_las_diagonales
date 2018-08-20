@@ -1,0 +1,16 @@
+<ul class="list-group">
+  <% @orders.each do |order| %>
+    <% product = @products.next %>
+    <li class="list-group-item justify-content-between">
+      <div class="row">
+        <div class="col-md-3">
+          <%= image_tag(product.main_photo, size: '80x80') %>
+        </div>
+        <div class="col-md-3">
+          <%= link_to product["title"], artist_product_path(product.artist.name, product), class: 'event-title' %>
+          <p class="order-price-amount">$<%= product.price.round(2).to_s %> x <%= order["response"]["items"][0]["quantity"].to_s %> unidad</p>
+        </div>
+      </div>
+    </li>
+  <% end %>
+</ul>

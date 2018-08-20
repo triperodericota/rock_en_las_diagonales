@@ -22,10 +22,11 @@ Rails.application.routes.draw do
     member do
       post 'follow', to: 'fans#follow_artist'
       post  'unfollow', to: 'fans#unfollow_artist'
+      get 'my_sales', to: 'orders#artist_sales'
     end
     resources :products do
       member do
-        post 'buy', to: 'order#create'
+        post 'buy', to: 'orders#create'
       end
     end
   end
@@ -33,13 +34,14 @@ Rails.application.routes.draw do
   resources :fans, only: [:index, :show, :destroy] do
     resource :orders, only: [:index] do
       member do
-        post 'cancel/:id', to: 'order#cancel'
+        post 'cancel/:id', to: 'orders#cancel'
 
       end
     end
     member do
       get 'my_events'
       get 'followed_artists'
+      get 'my_purchases', to: 'orders#fan_purchases'
     end
   end
 

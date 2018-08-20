@@ -2,3 +2,4 @@ development:
   mercadopago_SHORT_NAME: <%= Figaro.env.mercadopago_SHORT_NAME %>
   mercadopago_CLIENT_ID: <%= Figaro.env.mercadopago_CLIENT_ID %>
   mercadopago_CLIENT_SECRET: <%= Figaro.env.mercadopago_CLIENT_SECRET %>
+  mercadopago_APP_ID: <%= Figaro.env.mercadopago_APP_ID %>

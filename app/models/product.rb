@@ -10,7 +10,6 @@ class Product < ApplicationRecord
   validates :price, presence: true, length: { maximum: 10 }, numericality: { greater_than_or_equal_to: 0 }
   validates :stock, presence: true, length: { maximum: 10 }, numericality: { only_integer: true , greater_than_or_equal_to: 0 }
 
-
   def report_stock
     return "#{self.stock} unidad/es disponibles" if self.in_stock?
     'Por el momento no se dispone de stock'
@@ -25,7 +24,11 @@ class Product < ApplicationRecord
   end
 
   def amount_of_sales
+    self.orders.size
+  end
 
+  def main_photo
+    self.photos.first.image.url || nil
   end
 
 end

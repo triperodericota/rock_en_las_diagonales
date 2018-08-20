@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_16_012324) do
+ActiveRecord::Schema.define(version: 2018_08_20_145814) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "state", limit: 40, null: false
@@ -99,8 +99,10 @@ ActiveRecord::Schema.define(version: 2018_08_16_012324) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "buyer_id"
+    t.string "preference_id"
     t.index ["buyer_id"], name: "index_orders_on_buyer_id"
     t.index ["fan_id"], name: "index_orders_on_fan_id"
+    t.index ["preference_id"], name: "index_orders_on_preference_id", unique: true
     t.index ["product_id"], name: "index_orders_on_product_id"
     t.index ["state_id"], name: "index_orders_on_state_id"
   end

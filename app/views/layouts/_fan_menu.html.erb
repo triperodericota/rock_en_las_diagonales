@@ -10,6 +10,12 @@
     <span class="nav-link-text">Artistas</span>
   <% end %>
 </li>
+<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Compras">
+  <%= link_to my_purchases_fan_path(current_user.profile_id), class: 'nav-link' do %>
+    <%= icon('fas', 'balance-scale ') %>
+    <span class="nav-link-text">Mis compras</span>
+  <% end %>
+</li>
 <!--<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Events">
   <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
     <i class="fa fa-calendar"></i>
