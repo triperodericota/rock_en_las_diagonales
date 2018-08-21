@@ -1,4 +1,4 @@
-  require 'faker'
+require 'faker'
 
 def set_photo(path_file, model)
   begin
@@ -53,9 +53,40 @@ Artist.all.each do |a|
   end
 end
 
-
 # possibles order's states
 OrderState.delete_all
 OpenState.create(name: 'Abierta', description: 'Compra sin pago efectivizado')
 CloseState.create(name: 'Cerrada', description: 'Compra con pago total efectivizado')
 ExpiredState.create(name: 'Expirada', description: 'Compra expirada')
+
+# create buyer for orders
+buyer = Buyer.create(name: 'Lionel', surname: 'Messi', dni: 22522355, phone: '2215478321', email: Faker::Internet.unique.free_email('lionelm'))
+
+# products and orders
+Product.destroy_all
+Order.destroy_all
+Photo.destroy_all
+photo_index = 1
+puts "Products: \n"
+Artist.all.each do |a|
+  if a.id.odd?
+    2.times do |product_number|
+      p = Product.create(title: "product #{a.id} - #{product_number}", description: Faker::Lorem.sentence, price: Random.rand(50.to_f...500.to_f).round(2),
+                         stock: Random.rand(10...50), artist: a)
+      puts "\n Product #{p.id} = #{p.inspect}"
+      # set product's photos
+      if p.id <= 3
+        (p.id).times do
+          Photo.create(product: p, image: File.open("public/uploads/photo/image/#{photo_index}/product-photo#{p.id}.jpg"))
+          photo_index += 1
+        end
+      end
+      puts "\n Product #{p.id} photos = #{p.photos.inspect}"
+      # set product's orders
+      if p.id.odd?
+        order = Order.create(product: p, fan: Fan.all.sample, units: Random.rand(1...5), buyer: buyer)
+        puts "\n Order #{order.id} for product #{p.id} = #{order.inspect}"
+      end
+    end
+  end
+end

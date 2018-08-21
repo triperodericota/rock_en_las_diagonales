@@ -28,7 +28,11 @@ class Product < ApplicationRecord
   end
 
   def main_photo
-    self.photos.first.image.url || nil
+    begin
+      return self.photos.first.image.url
+    rescue
+      ActionController::Base.helpers.asset_path('default_product_photo.gif')
+    end
   end
 
 end
