@@ -8,12 +8,6 @@ class FansController < ApplicationController
   before_action :artist_params, only: [:follow_artist, :unfollow_artist]
   before_action :set_artist, only: [:follow_artist, :unfollow_artist]
 
-  # GET /fans
-  # GET /fans.json
-  def index
-    @fans = Fan.all
-  end
-
   # GET /fans/1
   # GET /fans/1.json
   def show
@@ -40,6 +34,7 @@ class FansController < ApplicationController
   # GET /fans/:id/followed_artists
   def followed_artists
     @followed_artists = @fan.artists.to_enum
+    @other_artists = (Artist.all - @followed_artists.to_a).to_enum
   end
 
   # POST /events/:id/add_event

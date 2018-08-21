@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get 'show_cities', to: 'welcome#show_cities'
   delete 'photos/:id', to: 'photos#destroy', as: 'photo'
 
-  resources :artists, param: :name, only: [:index, :show, :destroy ] do
+  resources :artists, param: :name, only: [:show, :destroy ] do
     resources :events do
       member do
         post 'add_event', to: 'fans#add_event', as: 'add'
@@ -31,13 +31,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :fans, only: [:index, :show, :destroy] do
-    resource :orders, only: [:index] do
-      member do
-        post 'cancel/:id', to: 'orders#cancel'
-
-      end
-    end
+  resources :fans, only: [:show, :destroy] do
     member do
       get 'my_events'
       get 'followed_artists'
