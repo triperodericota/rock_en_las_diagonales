@@ -48,7 +48,7 @@ Se utiliza SQLite3 como motor de base de datos (en ambientes de desarrollo y tes
 
 `rails db:seeds`
 
-ó directamente:
+o directamente:
 
 `rails db:setup`
 
@@ -58,6 +58,7 @@ Se utiliza SQLite3 como motor de base de datos (en ambientes de desarrollo y tes
 
 Acceder a la aplicación desde el browser. Por default en: localhost:3000/
 
+Para simular la compra de un producto a través de mercado pago se pueden utilizar los números de tarjetas indicados en https://www.mercadopago.com.ar/developers/es/solutions/payments/basic-checkout/test/test-payments/
 
 **Tests**
 
