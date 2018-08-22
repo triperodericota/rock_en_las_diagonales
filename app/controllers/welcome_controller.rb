@@ -16,7 +16,8 @@ class WelcomeController < ApplicationController
     search_string = "%#{params[:model].html_safe}%"
     @artists = Artist.where.has {name =~ search_string}
     @events = Event.where.has {(title =~ search_string) | (place =~ search_string)}
-    @any_result = true unless @artists.empty? & @events.empty?
+    @products = Product.where.has {(title =~ search_string)}
+    @any_result = true unless @artists.empty? & @events.empty? & @products.empty?
   end
 
   def show_cities

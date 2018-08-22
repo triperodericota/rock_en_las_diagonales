@@ -1,4 +1,7 @@
 <ul class="list-group">
+  <% if @products.empty? %>
+    <h3>No hay productos disponibles por el momento</h3>
+  <% end %>
   <% @products.each do |product| %>
     <li class="list-group-item justify-content-between">
       <div class="row">

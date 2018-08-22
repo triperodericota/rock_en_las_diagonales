@@ -6,20 +6,14 @@
     <div class="col-md-8">
       <!-- photos -->
       <div class="row">
-        <% i= 0
-           loop do %>
-          <div class="col-md-2 offset-1">
-            <% photo = @photos.next %>
-            <%= image_tag(photo.image.url, size:'150x150') %>
-          </div>
-          <% i+= 1
-             if (i.modulo 3).equal? 0 %>
-            </div>
-            <div class="row">
-          <% end %>
-          <% if i.equal? @product.photos.size %>
+        <% while !@photos.empty? do %>
+          <% next_photos = @photos.first(3) %>
+          <% next_photos.each do |photo| %>
+            <div class="col-md-2 offset-1">
+              <%= image_tag(photo.image.url, size:'150x150') %>
             </div>
           <% end %>
+          <% @photos = @photos.drop(3) %>
         <% end %>
       </div>
     </div>

@@ -83,10 +83,10 @@ Artist.all.each do |a|
       end
       puts "\n Product #{p.id} photos = #{p.photos.inspect}"
       # set product's orders
-      if p.id.odd?
-        order = Order.create(product: p, fan: Fan.all.sample, units: Random.rand(1...5), buyer: buyer)
-        puts "\n Order #{order.id} for product #{p.id} = #{order.inspect}"
-      end
+      #if p.id.odd?
+      #  order = Order.create(product: p, fan: Fan.all.sample, units: Random.rand(1...5), buyer: buyer)
+      #  puts "\n Order #{order.id} for product #{p.id} = #{order.inspect}"
+      #end
     end
   end
 end

@@ -6,38 +6,25 @@
   </div>
   <div class="row">
     <h3><%= 'Todavía no sigues a ningún artista!' if @followed_artists.to_a.size.zero? %></h3>
-  <% i = 0
-    loop do %>
-       <%=  render partial: 'artist_data', locals: { artist: @followed_artists.next } %>
-
-      <% i+= 1
-         if (i.modulo 3).equal? 0 %>
-        </div>
-        <div class="row">
+    <% while !@followed_artists.empty? do %>
+      <% next_artists = @followed_artists.first(3)
+        next_artists.each do |artist| %>
+        <%=  render partial: 'artist_data', locals: { artist: artist } %>
       <% end %>
-      <% if i.equal? @followed_artists.size %>
-        </div>
-      <% end %>
-  <% end %>
+    <%  @followed_artists = @followed_artists.drop(3)
+      end %>
   </div>
   <hr>
   <div class="row">
     <div class="col-md-12">
       <h4>Artistas que te pueden interesar..</h4>
     </div>
-    <% i = 0
-       loop do %>
-      <%=  render partial: 'artist_data', locals: { artist: @other_artists.next } %>
-
-      <% i+= 1
-         if (i.modulo 3).equal? 0 %>
-        </div>
-        <div class="row">
+    <% while !@other_artists.empty? do %>
+      <% next_artists = @other_artists.first(3)
+         next_artists.each do |artist| %>
+        <%=  render partial: 'artist_data', locals: { artist: artist } %>
       <% end %>
-      <% if i.equal? @followed_artists.size %>
-        </div>
-      <% end %>
-    <% end %>
-
+    <% @other_artists = @other_artists.drop(3)
+      end %>
   </div>
 </div>

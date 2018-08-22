@@ -46,6 +46,30 @@
         </div>
       <% end %>
 
+      <% if @products.any? %>
+        <div class="card">
+          <div class="card-header">
+            <%= icon('fas', 'compact-disc', 'Artistas') %>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <% @products.each do |product| %>
+                <li class="list-group-item list-group-item-action">
+                  <div class="row">
+                    <div class="col-md-1">
+                      <%= image_tag(product.main_photo, size: '80x80') %>
+                    </div>
+                    <div class="col-md-3">
+                      <%= link_to product.title, artist_product_path(product.artist.name, product), class: 'event-title' %>
+                    </div>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+
     </div>
   </div>
 </div>

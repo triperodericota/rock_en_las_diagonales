@@ -17,7 +17,9 @@
 
         <%= f.simple_fields_for :photos do |photos_f| %>
           <label>Fotos</label>
-          <ul class="photos-previewlist">
+          <div><small>La primera foto que cargues es la principal que tus seguidores pueden ver!</small></div>
+
+            <ul class="photos-previewlist">
             <% @product.max_photos_amount.times do |i| %>
               <div class="photo-preview">
                 <%=photos_f.label "photo-#{i}" do %>

@@ -4,8 +4,6 @@ class ProductsController < ApplicationController
   before_action :authenticate_artist!, except: [:show]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :set_artist
-  before_action :photos_enumerator, only: [:show]
-
 
   # GET /artists/:artist_name/products
   def index
@@ -14,6 +12,7 @@ class ProductsController < ApplicationController
 
   # GET /artists/:artist_name/products/1
   def show
+    @photos = @product.photos
     @order = Order.new(product: @product, units: 0)
     @order.build_buyer
     @order.buyer.build_address
@@ -101,9 +100,5 @@ class ProductsController < ApplicationController
           end
         end
       end
-    end
-
-    def photos_enumerator
-      @photos = @product.photos.to_enum
     end
 end

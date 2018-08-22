@@ -16,6 +16,7 @@
         <%= render partial: 'common_inputs', locals: { f: f } %>
         <%= f.simple_fields_for :photos do |photos_f| %>
           <label>Fotos</label>
+          <div><small>La primera foto que cargues es la principal que tus seguidores pueden ver!</small></div>
           <ul class="photos-previewlist">
             <% i = 0
               @product.photos.each do |photo| %>

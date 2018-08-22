@@ -33,8 +33,8 @@ class FansController < ApplicationController
 
   # GET /fans/:id/followed_artists
   def followed_artists
-    @followed_artists = @fan.artists.to_enum
-    @other_artists = (Artist.all - @followed_artists.to_a).to_enum
+    @followed_artists = @fan.artists
+    @other_artists = (Artist.all - @followed_artists)
   end
 
   # POST /events/:id/add_event
