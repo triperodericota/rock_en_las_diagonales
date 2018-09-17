@@ -56,7 +56,7 @@ o directamente:
 
 `rails s`
 
-Acceder a la aplicación desde el browser. Por default en: localhost:3000/
+Acceder a la aplicación desde el browser. Por default en: localhost:3000/. Puedes usar el email a_luisa_mar@yahoo.com para acceder como fan y van_halen@dicki.io para acceder como artista, ambos con password 12345678.
 
 Para simular la compra de un producto a través de mercado pago se pueden utilizar los números de tarjetas indicados en https://www.mercadopago.com.ar/developers/es/solutions/payments/basic-checkout/test/test-payments/
 
