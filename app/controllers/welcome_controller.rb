@@ -5,17 +5,15 @@ class WelcomeController < ApplicationController
 
   # GET /
   def index
-    @main_events = Audience.group("event_id").count.to_a.sort {|event1, event2| event2.second <=> event1.second}.take(3)
-    @main_events.collect! {|event| Event.find(event.first)}
-    @main_events = @main_events.to_enum
+    @main_events = Audience.popular_events.collect! {|event| Event.find(event.first)}.to_enum
     @main_artists = Artist.all.sample(3).to_enum
   end
 
   # GET /search
   def search
     search_string = "%#{params[:model].html_safe}%"
-    @artists = Artist.where.has {name =~ search_string}
-    @events = Event.where.has {(title =~ search_string) | (place =~ search_string)}
+    @artists = Artist.with_search_name(search_string)
+    @events = Event.fields_with_input_string(search_string)
     @products = Product.where.has {(title =~ search_string)}
     @any_result = true unless @artists.empty? & @events.empty? & @products.empty?
   end

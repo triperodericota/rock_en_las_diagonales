@@ -17,6 +17,7 @@ Fan.destroy_all
 puts "Fans: \n"
 (1..15).each do
   f = Fan.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
+  f.reload
   User.create(email: Faker::Internet.unique.free_email(f.first_name), username: Faker::Internet.unique.user_name,
               password: '12345678', password_confirmation: '12345678', profile_type: 'Fan', profile_id: f.id)
   puts "\nFan #{f.id} = #{f.inspect} - #{f.user.inspect}"
@@ -28,6 +29,7 @@ Artist.destroy_all
 puts "Artists: \n"
 (1..5).each do
   a = Artist.create(name: Faker::RockBand.unique.name)
+  a.reload
   User.create(email: Faker::Internet.unique.email(a.name), username: Faker::Internet.unique.user_name,
               password: '12345678', password_confirmation: '12345678', profile_type: 'Artist', profile_id: a.id)
   puts "\n Artist #{a.id} = #{a.inspect} - #{a.user.inspect}"
@@ -46,6 +48,7 @@ Artist.all.each do |a|
     ed = sd + Random.rand(5).hours + Random.rand(45).minutes unless sd.nil?
     e = Event.create(title: "#{event_number}#{event_number.ordinal} event", description: Faker::Lorem.paragraph, place: Faker::GameOfThrones.city,
                  start_date: (sd || Faker::Time.between(3.days.ago, 2.days.ago, :all)), end_date: (ed || (Faker::Time.between(1.days.ago, Date.today, :all))), artist: a)
+    e.reload
     puts "\n Event #{e.id} = #{e.inspect}"
     e.fans= Fan.all.sample(Random.rand(15))
     puts "\n Event #{e.id} audience = #{e.fans.inspect}"
@@ -75,6 +78,7 @@ Artist.all.each do |a|
                          stock: Random.rand(10...50), artist: a)
       puts "\n Product #{p.id} = #{p.inspect}"
       # set product's photos
+      p.reload
       if p.id <= 3
         (p.id).times do
           Photo.create(product: p, image: File.open("public/uploads/photo/image/#{photo_index}/product-photo#{p.id}.jpg"))

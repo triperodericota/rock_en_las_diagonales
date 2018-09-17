@@ -8,6 +8,8 @@ class Artist < ApplicationRecord
 
   validates :name, length: { maximum: 30 }, presence: true, uniqueness: true
 
+  scope :with_search_name, -> (search_name) {where.has {name =~ search_name}}
+
   def to_param
     name
   end

@@ -18,19 +18,7 @@ class OrdersController < ApplicationController
 
     set_buyer(buyer_params)
     @order.buyer = @buyer
-    # check if user load fields for home delivery
-    if @buyer.address.nil? && address_params.except(:apartament).values.all? {|v| !v.blank? }
-      @address = Address.new(address_params)
-      if @address.save
-        @buyer.address = @address
-        correct_address = true
-      else
-        correct_address = false
-      end
-    else
-      # without address for home delivery
-      correct_address = true
-    end
+    correct_address = @buyer.check_address(address_params)
 
     respond_to do |format|
       if @order.valid? && @buyer.save && correct_address
@@ -61,41 +49,9 @@ class OrdersController < ApplicationController
 
   # mercadopago checkout
   def create_checkout
-    main_photo = @product.main_photo
-    street_name = @buyer.address.street_name unless @buyer.address.nil?
-    street_number = @buyer.address.street_number unless @buyer.address.nil?
-    zip = @buyer.address.zip unless @buyer.address.nil?
     @preferenceData = {
-        "items": [
-            { "id": @product.id,
-              "title": @product.title,
-              "quantity": @order.units,
-              "unit_price": @product.price.to_f,
-              "description": @product.description,
-              "picture_url": main_photo,
-              "currency_id":"ARS"
-            }
-        ],
-        "payer":
-            { 	 "name": @buyer.name,
-                "surname": @buyer.surname,
-                "email": @buyer.email,
-                "date_created": DateTime.current,
-                "phone": {
-                    "area_code": @buyer.phone_cod_area,
-                    "number": @buyer.phone_number
-                },
-                "identification":
-                    {  "type": "DNI",
-                       "number": @buyer.dni,
-                    },
-                "address":
-                    {   "street_name": street_name,
-                        "street_number": street_number,
-                        "zip_code": zip
-                    }
-
-            },
+        "items": [ @product.hash_data_for_order(@order.units) ],
+        "payer": @buyer.hash_data_for_order,
         "back_urls": {
             "success": "https://localhost:3000/fans/#{current_user.profile.id}/my_purchases",
             "pending": "https://localhost:3000/fans/#{current_user.profile.id}/my_purchases",
