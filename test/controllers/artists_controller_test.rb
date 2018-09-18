@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ArtistsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @artist = artists(:one)
+    @artist = artists(:artist1)
   end
 
   test "should get index" do

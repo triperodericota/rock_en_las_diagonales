@@ -3,15 +3,14 @@
 one:
   name: MyString
   surname: MyString
-  dni: 
-  phone_number: MyString
+  dni: 0
   phone_cod_area: MyString
   email: MyString
 
 two:
   name: MyString
   surname: MyString
-  dni: 
+  dni: 0
   phone_number: MyString
   phone_cod_area: MyString
   email: MyString

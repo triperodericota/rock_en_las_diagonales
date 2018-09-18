@@ -2,7 +2,7 @@ require 'test_helper'
 
 class FansControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @fan = fans(:one)
+    @fan = fans(:fan1)
   end
 
   test "should get index" do

@@ -24,6 +24,8 @@
 /yarn-error.log
 
 /public/assets
+/public/uploads
+
 .byebug_history
 
 # Ignore master key for decrypting credentials and more.
@@ -31,5 +33,6 @@
 
 Requerimientos.odt
 .idea/*
+
 # Ignore application configuration
 /config/application.yml
