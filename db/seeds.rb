@@ -81,7 +81,9 @@ Artist.all.each do |a|
       p.reload
       if p.id <= 3
         (p.id).times do
-          Photo.create(product: p, image: File.open("public/uploads/photo/image/#{photo_index}/product-photo#{p.id}.jpg"))
+          photo = Photo.create(product: p)
+          photo.reload
+          set_photo("public/uploads/photo/image/#{photo_index}/product-photo#{p.id}.jpg", p)
           photo_index += 1
         end
       end
