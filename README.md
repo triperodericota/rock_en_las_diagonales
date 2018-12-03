@@ -34,7 +34,7 @@ Otras dependencias:
 
 2 - Instalación de las dependencias con Bundler
 
-`cd catedra-ttps-ruby/`
+`cd rock_en_las_diagonales/`
 
 `bundle`
 
