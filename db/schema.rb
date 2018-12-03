@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_18_172415) do
+ActiveRecord::Schema.define(version: 2018_08_20_145814) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "state", limit: 40, null: false
@@ -109,7 +109,7 @@ ActiveRecord::Schema.define(version: 2018_09_18_172415) do
 
   create_table "photos", force: :cascade do |t|
     t.integer "product_id"
-    t.string "photo"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_photos_on_product_id"
