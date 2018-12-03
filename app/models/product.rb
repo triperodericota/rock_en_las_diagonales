@@ -29,6 +29,10 @@ class Product < ApplicationRecord
     self.orders.size
   end
 
+  def update_stock_after_new_order(units_order)
+    self.update(stock: self.stock - units_order)
+  end
+
   def main_photo
     begin
       return self.photos.first.image.url

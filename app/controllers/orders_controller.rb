@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 
   before_action :set_product, except: [:artist_sales, :fan_purchases]
-  before_action :order_params, only: [:create]
+  before_action :order_params, only: [:create, :set_buyer]
   before_action :mercadopago_authentication
   before_action :authenticate_artist!, only: [:artist_sales]
   before_action :set_artist, only: [:artist_sales]
@@ -10,20 +10,15 @@ class OrdersController < ApplicationController
 
   # POST /artists/:artist_name/products/:id/buy
   def create
-    @order = Order.new(units: params[:order][:units].to_i, product: @product)
-    @order.fan = current_user.profile
-    # take buyer and address params
-    buyer_params = order_params.delete(:buyer).except(:address)
+    @order = Order.new(units: params[:order][:units].to_i, product: @product, fan: current_user.profile, buyer: @buyer)
+    # take and check address params
     address_params = order_params.delete(:buyer).delete(:address)
-
-    set_buyer(buyer_params)
-    @order.buyer = @buyer
     correct_address = @buyer.check_address(address_params)
 
     respond_to do |format|
       if @order.valid? && @buyer.save && correct_address
         if @product.stock_greater_or_equals_than? @order.units
-          @product.update(stock: @product.stock - @order.units)
+          @product.update_stock_after_new_order(@order.units)
           create_checkout
           @order.preference_id = @preference["response"]["id"]
           @order.save
@@ -85,7 +80,8 @@ class OrdersController < ApplicationController
     params.require(:order).permit(:product, :units, buyer: [:name, :surname, :dni, :phone, address: [:state, :city, :street_name, :street_number, :apartament, :zip]])
   end
 
-  def set_buyer(buyer_params)
+  def set_buyer
+    buyer_params = order_params.delete(:buyer).except(:address)
     @buyer = Buyer.find_by(dni: buyer_params[:dni]) || Buyer.new(buyer_params)
     @buyer.email = current_user.email if @buyer.email.nil?
   end
