@@ -7,7 +7,7 @@ y  mostrarse ante la audencia.
 
 **Dependencias del proyecto:**
 
-· Intérprete de Ruby(2.3.1)
+· Intérprete de Ruby(2.5.1)
 
 · Ruby on Rails(5.2.0)
 
@@ -63,5 +63,4 @@ Para simular la compra de un producto a través de mercado pago se pueden utiliz
 **Tests**
 
 Para la ejecución de todos los test usar el comando rails test. También es posible ejecutar cada uno de los tests en forma separada,
-para esto indicar el path del test que se desea ejecutar (por ejemplo: rails test test/models/event_test.rb). En caso de querer ejecutar
- n método en particular usar el argumento -n junto con el nombre del método deseado.
+(por ejemplo: rake test:models. Para más información: http://www.guiasrails.es/testing.html
