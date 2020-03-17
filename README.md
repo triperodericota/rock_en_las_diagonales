@@ -7,9 +7,9 @@ y  mostrarse ante la audencia.
 
 **Dependencias del proyecto:**
 
-· Intérprete de Ruby(2.5.1)
+· Intérprete de Ruby(2.7.0)
 
-· Ruby on Rails(5.2.0)
+· Ruby on Rails(5.2.4.1)
 
 · SQLite3 (en desarrollo)
 
@@ -22,7 +22,7 @@ Otras dependencias:
 
 · Simple-form(4.0.1), para la construcción sencilla de formularios
 
-· Devise(4.4.3), como mecanismo de autenticación
+· Devise(4.7.1), como mecanismo de autenticación
 
 · CarrierWave(1.2.3), para la subida de archivos
 

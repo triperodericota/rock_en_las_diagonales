@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
     @photos = @product.photos
     @order = Order.new(product: @product, units: 0)
     @order.build_buyer
-    @order.buyer.build_address
+    @order.build_address
   end
 
   # GET /artists/:artist_name/products/new

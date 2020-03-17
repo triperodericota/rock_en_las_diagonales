@@ -32,7 +32,7 @@
 
         <h4>Queres recibir el producto en tu casa?</h4>
 
-        <%= f.simple_fields_for @order.buyer.address do |af| %>
+        <%= f.simple_fields_for @order.address do |af| %>
           <div class="form-row">
             <div class="col-md-6 mb-3">
               <%= af.input :state, label: 'Provincia', collection: CS.states(:AR).to_a, label_method: -> state {state[1]},

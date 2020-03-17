@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_20_145814) do
+ActiveRecord::Schema.define(version: 2019_03_18_203006) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "state", limit: 40, null: false
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2018_08_20_145814) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["buyer_id"], name: "index_addresses_on_buyer_id"
+    t.index ["zip"], name: "index_addresses_on_zip"
   end
 
   create_table "artists", force: :cascade do |t|
@@ -100,6 +101,8 @@ ActiveRecord::Schema.define(version: 2018_08_20_145814) do
     t.datetime "updated_at", null: false
     t.integer "buyer_id"
     t.string "preference_id"
+    t.integer "address_id"
+    t.index ["address_id"], name: "index_orders_on_address_id"
     t.index ["buyer_id"], name: "index_orders_on_buyer_id"
     t.index ["fan_id"], name: "index_orders_on_fan_id"
     t.index ["preference_id"], name: "index_orders_on_preference_id", unique: true
