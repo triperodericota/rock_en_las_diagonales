@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_18_203006) do
+ActiveRecord::Schema.define(version: 2020_06_01_103016) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "state", limit: 40, null: false
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2019_03_18_203006) do
 
   create_table "artists", force: :cascade do |t|
     t.text "description", default: ""
-    t.string "name", limit: 30
+    t.string "name", limit: 255
     t.index ["name"], name: "index_artists_on_name", unique: true
   end
 
@@ -83,11 +83,11 @@ ActiveRecord::Schema.define(version: 2019_03_18_203006) do
 
   create_table "order_states", force: :cascade do |t|
     t.datetime "date", null: false
-    t.integer "order_id", null: false
+    t.integer "orders_id", null: false
     t.integer "state_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["order_id"], name: "index_order_states_on_order_id"
+    t.index ["orders_id"], name: "index_order_states_on_orders_id"
     t.index ["state_id"], name: "index_order_states_on_state_id"
   end
 
