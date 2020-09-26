@@ -48,7 +48,7 @@ gem 'simple_form'
 gem 'cancancan', '~> 2.0'
 gem 'font-awesome-sass', '~> 5.0.13'
 # Squeel,lets write your Active Record queries with fewer strings
-gem 'baby_squeel'
+#gem 'baby_squeel'
 # image's processing
 gem "mini_magick"
 # simple way to upload files
