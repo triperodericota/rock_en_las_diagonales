@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_01_103016) do
+ActiveRecord::Schema.define(version: 2020_09_28_232645) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "state", limit: 40, null: false
@@ -19,11 +19,16 @@ ActiveRecord::Schema.define(version: 2020_06_01_103016) do
     t.string "street_number", limit: 25, null: false
     t.string "zip", limit: 5, null: false
     t.string "apartament", limit: 5
-    t.integer "buyer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["buyer_id"], name: "index_addresses_on_buyer_id"
     t.index ["zip"], name: "index_addresses_on_zip"
+  end
+
+  create_table "adresses_and_buyers", force: :cascade do |t|
+    t.integer "address_id"
+    t.integer "buyer_id"
+    t.index ["address_id"], name: "index_adresses_and_buyers_on_address_id"
+    t.index ["buyer_id"], name: "index_adresses_and_buyers_on_buyer_id"
   end
 
   create_table "artists", force: :cascade do |t|
@@ -83,11 +88,11 @@ ActiveRecord::Schema.define(version: 2020_06_01_103016) do
 
   create_table "order_states", force: :cascade do |t|
     t.datetime "date", null: false
-    t.integer "orders_id", null: false
+    t.integer "order_id", null: false
     t.integer "state_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["orders_id"], name: "index_order_states_on_orders_id"
+    t.index ["order_id"], name: "index_order_states_on_order_id"
     t.index ["state_id"], name: "index_order_states_on_state_id"
   end
 

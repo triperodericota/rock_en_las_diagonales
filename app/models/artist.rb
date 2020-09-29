@@ -6,7 +6,7 @@ class Artist < ApplicationRecord
   has_many :events, dependent: :delete_all
   has_many :products
 
-  validates :name, length: { maximum: 30 }, presence: true, uniqueness: true
+  validates :name, length: { maximum: 255 }, presence: true, uniqueness: true
 
   scope :with_search_name, -> (search_name) {where.has {name =~ search_name}}
 

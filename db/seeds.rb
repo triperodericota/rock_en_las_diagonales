@@ -18,7 +18,7 @@ puts "Fans: \n"
 (1..15).each do
   f = Fan.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name)
   f.reload
-  User.create!(email: Faker::Internet.unique.free_email(name: f.first_name), username: Faker::Internet.unique.user_name,
+  User.create!(email: Faker::Internet.unique.free_email(name: f.first_name), username: Faker::Internet.unique.user_name(specifier: 1..20),
               password: '12345678', password_confirmation: '12345678', profile_type: 'Fan', profile_id: f.id)
   puts "\nFan #{f.id} = #{f.inspect} - #{f.user.inspect}"
  set_photo("public/uploads/user/photo/#{f.user.id}/profile#{f.user.id}.jpg", f.user)
@@ -29,7 +29,8 @@ Artist.destroy_all
 puts "Artists: \n"
 (1..5).each do
   a = Artist.create!(name: Faker::Music::RockBand.unique.name)
-  User.create!(email: Faker::Internet.unique.email(name: a.name), username: Faker::Internet.unique.user_name,
+  a.reload
+  User.create!(email: Faker::Internet.unique.email(name: a.name), username: Faker::Internet.unique.user_name(specifier: 1..20),
               password: '12345678', password_confirmation: '12345678', profile_type: 'Artist', profile_id: a.id)
   puts "\n Artist #{a.id} = #{a.inspect} - #{a.user.inspect}"
   a.fans = Fan.all.sample(Random.rand(15))
@@ -45,11 +46,14 @@ Artist.all.each do |a|
   events_number.times do |event_number|
     sd = event_number.odd? ? Faker::Time.forward(days: 100) : Faker::Time.between(from: 3.days.ago, to: 2.days.ago)
     ed = (sd + Random.rand(5).hours) + Random.rand(45).minutes
+    puts "event start day: #{sd} / event end day: #{ed}"
 
     e = Event.create!(title: "#{event_number}#{event_number.ordinal} event", description: Faker::Lorem.paragraph, place: Faker::TvShows::GameOfThrones.city,
                  start_date: sd, end_date: ed, artist: a)
     puts "\n Event #{e.id} = #{e.inspect}"
+    e.reload
     e.fans= Fan.all.sample(Random.rand(15))
+    e.save
     puts "\n Event #{e.id} audience = #{e.fans.inspect}"
     set_photo("public/uploads/event/photo/#{e.id}/event#{e.id}.jpg", e)
   end
@@ -62,6 +66,7 @@ CloseState.create!(name: 'Cerrada', description: 'Compra con pago total efectivi
 ExpiredState.create!(name: 'Expirada', description: 'Compra expirada')
 
 # create buyer for orders
+Buyer.delete_all
 buyer = Buyer.create!(name: 'Lionel', surname: 'Messi', dni: 22522355, phone: '2215478321', email: Faker::Internet.unique.free_email(name: 'lionelm'))
 
 # products and orders
