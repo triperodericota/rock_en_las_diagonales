@@ -1,16 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  surname: MyString
-  dni: 0
-  phone_cod_area: MyString
-  email: MyString
+#buyer1:
+#  name: Leo
+#  surname: Messi
+#  dni: 27874956
+#  phone_cod_area: 221
+#  email: leonelm@gmail.com
 
-two:
-  name: MyString
-  surname: MyString
-  dni: 0
-  phone_number: MyString
-  phone_cod_area: MyString
-  email: MyString

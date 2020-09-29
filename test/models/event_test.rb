@@ -50,7 +50,7 @@ class EventTest < ActiveSupport::TestCase
     assert_not @event2.is_favourite_for? fans(:fan2)
   end
 
-  #it's depend for the moment in execute the test
+  #it depends for the moment that the test is executed
   test "should valid how much time is left to start" do
     assert_equal @event1.how_much_time_is_left_to_start, 'Evento finalizado'
     new_event = Event.new(title: 'new event', start_date: (DateTime.tomorrow + 20.hours), end_date: (DateTime.tomorrow + 23.hours + 30.minutes), artist: artists(:artist3))
