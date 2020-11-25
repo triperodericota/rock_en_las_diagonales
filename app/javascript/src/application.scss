@@ -1,0 +1,126 @@
+@import "~bootstrap/scss/bootstrap";
+
+main{
+  margin-top: 5%;
+}
+
+.login-error{
+  color: red;
+  font-size: x-small;
+}
+
+.login-error > p {
+  margin-bottom: 0rem;
+}
+
+#register-link{
+  color: white;
+}
+
+#signup-form{
+  margin-top: 5%;
+}
+
+.new-button{
+  margin-top: 1%;
+  margin-bottom: 2%;
+}
+
+.nav-item.event-item {
+  width: 33%;
+}
+
+.date {
+  width: 50px;
+  display: inline-block;
+
+  .day {
+    font-size: 21px;
+    line-height: 1.1em;
+  }
+  .month { font-size: 13px; }
+}
+
+.card-title.event-title {
+  display: inline-block;
+}
+
+.profile-image{
+  height: 200px;
+  width: 200px;
+}
+
+
+.btn.btn-primary.follow-button{
+  margin: 6%;
+}
+
+.artist-title {
+  position: relative;
+  margin-top: 12%;
+  color: white;
+  font-size: 80px;
+}
+
+
+.photos-previewlist {
+  display: block;
+  padding-left: 0;
+}
+
+.photo-preview {
+  display: inline-block;
+  position: relative;
+  margin: 0 20px 30px 0;
+  margin-bottom: 0;
+  padding-bottom: 98px;
+}
+
+.photo-preview > input{
+  display: none;
+}
+
+.photo-preview img{
+  display: inline-block;
+  cursor: pointer;
+}
+
+#buy-button{
+  margin-bottom: 0rem;
+}
+
+#units-label{
+  margin-bottom: 0rem;
+}
+
+#without-stock{
+  color: red;
+}
+
+#order-error{
+  font-size: small;
+  color: red;
+}
+
+#search-result{
+  list-style: none;
+  padding: 0px;
+  width: 250px;
+  position: fixed;
+  margin: 0;
+}
+
+#search-result li{
+  background: #c2c2d6;
+  padding: 4px;
+  margin-bottom: 1px;
+  border-radius: 4px;
+}
+
+#search-result li:nth-child(even){
+  background: #b3b3cc;
+}
+
+#search-result li:hover{
+  cursor: pointer;
+}
