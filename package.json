@@ -1,5 +1,13 @@
 {
   "name": "rock_en_las_diagonales",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@rails/activestorage": "^6.0.3-4",
+    "@rails/ujs": "^6.0.3-4",
+    "@rails/webpacker": "^5.2.1",
+    "bootstrap": "^4.5.3",
+    "channels": "^0.0.4",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1"
+  }
 }
