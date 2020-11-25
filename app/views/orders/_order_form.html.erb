@@ -1,0 +1,28 @@
+
+<% if current_user.fan?
+     disable = @product.in_stock? %>
+  <p class="text-danger"><%= 'Por el momento no se dispone de stock' if !disable %></p>
+  <%= simple_form_for(@order, url: buy_artist_product_path(@product.artist, @product), html: { method: :post} ) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+    <div id="order-error">
+      <p><%= flash[:error] %></p>
+    </div>
+
+    <div class="form-row align-items-center">
+      <%= f.input :product, as: :hidden, input_html: { value: @product.id } %>
+      <%= f.input :delivery, as: :hidden %>
+      <div class="col-sm-3 mb-3">
+        <p id="units-label">Cantidad</p>
+        <%= f.input :units, disabled: !disable, label: false, input_html: { value: 1, min: 0, step: 1, class: 'form-control' } %>
+      </div>
+      <div class="col-sm-9 mb-3">
+        <%= button_tag 'Comprar ahora', type: 'button', id: 'buy-button', class: 'btn btn-primary btn-block', disabled: !disable, data: { toggle: 'modal', target: '#payment-modal' } %>
+      </div>
+    </div>
+    <%= f.simple_fields_for @order.buyer do |fb| %>
+      <%= render partial: 'buyers/buyer_form', locals: {:f => fb } %>
+    <% end %>
+  <% end %>
+<% end %>

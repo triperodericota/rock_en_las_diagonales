@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'search', to: 'welcome#search'
   get 'show_cities', to: 'welcome#show_cities'
   delete 'photos/:id', to: 'photos#destroy', as: 'photo'
+  get 'register_pay' ,to: 'payments#create'
 
   resources :artists, param: :name, only: [:show, :destroy ] do
     resources :events do
@@ -21,8 +22,8 @@ Rails.application.routes.draw do
     end
     member do
       post 'follow', to: 'fans#follow_artist'
-      post  'unfollow', to: 'fans#unfollow_artist'
-      get 'my_sales', to: 'orders#artist_sales'
+      post 'unfollow', to: 'fans#unfollow_artist'
+      get 'my_sales', to: 'artists#my_sales'
     end
     resources :products do
       member do
@@ -35,7 +36,7 @@ Rails.application.routes.draw do
     member do
       get 'my_events'
       get 'followed_artists'
-      get 'my_purchases', to: 'orders#fan_purchases'
+      get 'my_purchases', to: 'fan_purchases'
     end
   end
 

@@ -31,10 +31,4 @@ class ApplicationController < ActionController::Base
       @fan = current_user.profile
     end
 
-    def mercadopago_authentication
-      require 'mercadopago.rb'
-      $mp = MercadoPago.new(Figaro.env.mercadopago_CLIENT_ID, Figaro.env.mercadopago_CLIENT_SECRET)
-      $accessToken = $mp.get_access_token()
-    end
-
 end

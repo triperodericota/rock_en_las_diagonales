@@ -41,7 +41,8 @@ class Buyer < ApplicationRecord
         "identification":
             {  "type": "DNI",
                "number": self.dni,
-            }
+            },
+        "address": {},
     }
   end
 

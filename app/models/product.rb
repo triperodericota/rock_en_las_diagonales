@@ -1,5 +1,7 @@
 class Product < ApplicationRecord
 
+  include Rails.application.routes.url_helpers
+
   belongs_to :artist
   has_many :orders
   has_many :photos, :dependent => :destroy
@@ -10,7 +12,15 @@ class Product < ApplicationRecord
   validates :price, presence: true, length: { maximum: 10 }, numericality: { greater_than_or_equal_to: 0 }
   validates :stock, presence: true, length: { maximum: 10 }, numericality: { only_integer: true , greater_than_or_equal_to: 0 }
 
-  scope :with_search_title, -> (search_title) {where.has {name =~ search_title}}
+  scope :with_search_title, -> (search_title) {where ("title LIKE ?"), search_title}
+
+  def to_s
+    self.title
+  end
+
+  def base_uri
+    artist_product_path(self.artist.name, self.id)
+  end
 
   def report_stock
     return "#{self.stock} unidad/es disponibles" if self.in_stock?
@@ -34,9 +44,9 @@ class Product < ApplicationRecord
   end
 
   def main_photo
-    begin
+    if !self.photos.first.image.url.nil?
       return self.photos.first.image.url
-    rescue
+    else
       ActionController::Base.helpers.asset_path('default_product_photo.gif')
     end
   end
@@ -47,7 +57,6 @@ class Product < ApplicationRecord
       "quantity": units,
       "unit_price": self.price.to_f,
       "description": self.description,
-      "picture_url": self.main_photo,
       "currency_id":"ARS"
     }
   end

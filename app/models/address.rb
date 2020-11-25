@@ -17,10 +17,10 @@ class Address < ApplicationRecord
   end
 
   def hash_data_for_order(data_hash)
-    data_hash["payer"]["address"] =
-        {   "street_name": self.address.street_name,
-            "street_number": self.address.street_number,
-            "zip_code": self.address.zip
+    data_hash[:payer][:address] =
+        {   "street_name": self.street_name,
+            "street_number": self.street_number,
+            "zip_code": self.zip
         }
   end
 

@@ -2,8 +2,11 @@
   <div class="row">
     <div class="col-md-12">
 
-      <h2>Ventas</h2>
+      <h2>Mis ventas</h2>
       <%= render 'orders/index' %>
+      <div class="alert alert-primary" role="alert">
+        <h5> Total: $<%= @total %> </h5>
+      </div>
     </div>
   </div>
 </div>
