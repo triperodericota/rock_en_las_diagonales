@@ -1,6 +1,9 @@
 FROM ruby:2.7-alpine
 
-RUN apk add --no-cache --update build-base git linux-headers nodejs sqlite sqlite-dev tzdata yarn
+RUN apk add --no-cache --update build-base git linux-headers nodejs sqlite sqlite-dev tzdata yarn imagemagick
+
+# throw errors if Gemfile has been modified since Gemfile.lock
+RUN bundle config --global frozen 1
 
 WORKDIR /app
 

@@ -80,10 +80,7 @@ class OrdersController < ApplicationController
   def stock_validation_and_response_with(http_response)
     if @product.stock_greater_or_equals_than? @order.units
       @product.update_stock_after_new_order(@order.units)
-      @preference = @order.create_checkout_with("https://localhost:3000/fans/#{current_user.profile.id}/my_purchases",
-                                                "https://localhost:3000/fans/#{current_user.profile.id}/my_purchases",
-                                       artist_product_url(@product.artist, @product)         )
-      byebug
+      @preference = @order.create_checkout_with()
       http_response.html { redirect_to @preference["response"]["sandbox_init_point"] }
     else
       flash[:error] = 'No hay stock suficiente para satisfacer su demanda. Por favor, intente más tarde.'

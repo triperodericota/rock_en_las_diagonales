@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.2.4.1'
+gem 'rails', '~> 6.0.3', '>= 6.0.3.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Puma as the app server
@@ -52,7 +52,7 @@ gem 'font-awesome-sass', '~> 5.0.13'
 # image's processing
 gem "mini_magick"
 # simple way to upload files
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave'
 # generate fake data
 gem 'faker'
 #is a tool for converting your Faker's methods to the latest Faker argument style with static code analysis.
@@ -63,6 +63,12 @@ gem 'mercadopago-sdk'
 gem 'figaro'
 # list cities in state
 gem 'city-state'
+# JS compiler
+gem 'webpacker'
+# pagination
+gem 'will_paginate-bootstrap4'
+
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

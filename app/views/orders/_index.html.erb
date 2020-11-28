@@ -1,31 +1,20 @@
 <ul class="list-group">
+
   <% @orders.each do |order| %>
     <% product = order.product %>
     <li class="list-group-item justify-content-between">
       <div class="row">
         <div class="col-md-3">
-          <%= image_tag(product.main_photo, size: '80x80') %>
+          <% #if not product.main_photo.nil? %>
+            <%= image_tag(product.main_photo, size: '80x80')  %>
+          <% #end %>
         </div>
         <div class="col-md-3">
           <%= link_to product["title"], artist_product_path(product.artist.name, product), class: 'event-title' %>
           <p class="order-price-amount">$<%= product.price.round(2).to_s %> x <%= order.units.to_s %> <% order.units == 1 ? 'unidad' : 'unidades' %></p>
-          <% if order.payment.status == "approved" %>
             <div>
-              <small>Estado del pago: <span class="badge badge-success">Aprobado</span></small>
+              <small>Estado del pago: <span class="badge <%= order.status_css_style %>"><%= I18n.t "activerecord.attributes.payment.status.#{order.payment_status}" %></span></small>
             </div>
-          <% elsif order.payment.status == "rejected" %>
-            <div>
-              <small>Estado del pago: <span class="badge badge-danger">Rechazado</span></small>
-            </div>
-          <% elsif order.payment.status == "pending" %>
-            <div>
-              <small>Estado del pago: <span class="badge badge-warning">Pendiente</span></small>
-            </div>
-          <% else %>
-            <div>
-              <small>Estado del pago: <span class="badge badge-secondary">Desconocido</span></small>
-            </div>
-          <% end %>
           <div>
             <small><%= order.created_at.strftime('%F %T') %></small>
           </div>
@@ -34,3 +23,7 @@
     </li>
   <% end %>
 </ul>
+<div class="nav justify-content-center" id="pagination-content">
+  <%= will_paginate @orders, list_classes: ['pagination'], aria_label: 'Page Navigation',
+                    previous_label: '&laquo;', next_label: '&raquo;', renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+</div>
