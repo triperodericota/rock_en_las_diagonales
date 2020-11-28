@@ -12,6 +12,7 @@ def set_photo(path_file, model)
   end
 end
 
+Photo.destroy_all
 # fan's users
 Fan.destroy_all
 puts "Fans: \n"
@@ -48,7 +49,7 @@ Artist.all.each do |a|
     ed = (sd + Random.rand(5).hours) + Random.rand(45).minutes
     puts "event start day: #{sd} / event end day: #{ed}"
 
-    e = Event.create!(title: "#{event_number}#{event_number.ordinal} event", description: Faker::Lorem.paragraph, place: Faker::TvShows::GameOfThrones.city,
+    e = Event.create!(title: "#{event_number}#{event_number.ordinal} event"[0..39], description: Faker::Lorem.paragraph, place: Faker::TvShows::GameOfThrones.city,
                  start_date: sd, end_date: ed, artist: a)
     puts "\n Event #{e.id} = #{e.inspect}"
     e.reload
@@ -59,20 +60,10 @@ Artist.all.each do |a|
   end
 end
 
-# possibles order's states
-OrderState.delete_all
-OpenState.create!(name: 'Abierta', description: 'Compra sin pago efectivizado')
-CloseState.create!(name: 'Cerrada', description: 'Compra con pago total efectivizado')
-ExpiredState.create!(name: 'Expirada', description: 'Compra expirada')
-
-# create buyer for orders
-Buyer.delete_all
-buyer = Buyer.create!(name: 'Lionel', surname: 'Messi', dni: 22522355, phone: '2215478321', email: Faker::Internet.unique.free_email(name: 'lionelm'))
 
 # products and orders
 Product.destroy_all
 Order.destroy_all
-Photo.destroy_all
 photo_index = 1
 puts "Products: \n"
 Artist.all.each do |a|
