@@ -4,7 +4,7 @@ class ArtistsController < ApplicationController
   before_action :set_artist
   before_action :is_follower?, only: [:show]
   before_action :authenticate_fan!, only: [:show, :index]
-
+  before_action :my_sales_params, only: [:my_sales]
 
   # GET /artists/1
   # GET /artists/1.json
@@ -22,6 +22,16 @@ class ArtistsController < ApplicationController
     end
   end
 
+
+  # GET artists/:id/my_sales
+  def my_sales
+    #@orders = @artist.products.collect {|product| product.orders}.flatten
+    current_page = params[:page].nil? ? 1 : params[:page]
+    @orders = Order.where(product_id: @artist.products).paginate(:page => current_page, :per_page => 2)
+    @total = @artist.products.collect {|product| product.orders}.flatten.
+        collect {|order| order.total_price }.reduce(:+)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_artist
@@ -35,6 +45,10 @@ class ArtistsController < ApplicationController
 
     def is_follower?
       @is_follower = current_user.profile.following? @artist if current_user.fan?
+    end
+
+    def my_sales_params
+      params.permit(:name, :page)
     end
 
 end

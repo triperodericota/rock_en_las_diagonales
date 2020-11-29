@@ -19,7 +19,6 @@ class PaymentsController < ApplicationController
       if @payment.save
         @order.payment = @payment
         @order.save
-        byebug
         flash[:notice] = "Su compra se realizó correctamente.\n Su pago se encuentra #{@payment.status}"
         format.html { redirect_to my_purchases_fan_path(current_user)}
       else

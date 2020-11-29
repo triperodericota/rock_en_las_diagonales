@@ -1,5 +1,3 @@
-<%= stylesheet_link_tag params[:controller] %>
-<% javascript_include_tag params[:controller] %>
 
 <div class="container">
   <div class="row">
@@ -20,14 +18,16 @@
           <ul class="photos-previewlist">
             <% i = 0
               @product.photos.each do |photo| %>
-              <div class="photo-preview">
-                <%= link_to(icon('far', 'trash-alt'), photo_path(photo), { role: :button, method: :delete }) %>
-                <label for=<%= "photo-#{i}" %>>
-                  <%= image_tag(photo.image.url, size:'80x80', id: "photo-preview-#{i}", onclick: 'openDialog(event)') %>
-                </label>
-                <%= photos_f.input_field :image, id: ("photo-#{i}".to_sym), name: "product[photos_attributes][#{i}][image]" , onchange: "displayProductPhoto(event)", value: photo.image %>
-                <% i+= 1 %>
-              </div>
+              <% if !photo.image.url.nil? %>
+                <div class="photo-preview">
+                  <%= link_to(icon('far', 'trash-alt'), photo_path(photo), { role: :button, method: :delete }) %>
+                  <label for=<%= "photo-#{i}" %>>
+                    <%= image_tag(photo.image.url, size:'80x80', id: "photo-preview-#{i}", onclick: 'openDialog(event)') %>
+                  </label>
+                  <%= photos_f.input_field :image, id: ("photo-#{i}".to_sym), name: "product[photos_attributes][#{i}][image]" , onchange: "displayProductPhoto(event)", value: photo.image %>
+                  <% i+= 1 %>
+                </div>
+              <% end %>
             <% end %>
             <% (@product.max_photos_amount - @product.photos.size).times do %>
               <div class="photo-preview">

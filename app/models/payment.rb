@@ -9,11 +9,17 @@ class Payment < ApplicationRecord
   validates :mercadopago_payment_id, presence: true, numericality: { only_integer: true }
 
   def approved?
-
+    self.status == "approved"
   end
 
   def rejected?
-
+    self.status == "rejected"
   end
+
+  def pending?
+    self.status == "pending"
+  end
+
+
 
 end

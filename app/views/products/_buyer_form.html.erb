@@ -30,12 +30,13 @@
           </div>
         </div>
 
-        <h4>Queres recibir el producto en tu casa?</h4>
 
+        <h4>Queres recibir el producto en tu casa?</h4>
+        <button class="btn btn-success" id="withDelivery">Si</button>
         <%= f.simple_fields_for @order.address do |af| %>
           <div class="form-row">
             <div class="col-md-6 mb-3">
-              <%= af.input :state, label: 'Provincia', collection: CS.states(:AR).to_a, label_method: -> state {state[1]},
+              <%= af.input :state, as: :select, label: 'Provincia', disabled: true, collection: CS.states(:AR).to_a, label_method: -> state {state[1]},
                            value_method: -> state {state[0]} , prompt: 'Selecciona tu provincia', input_html: { class: 'custom-select', id: 'state' } %>
             </div>
             <div class="col-md-6 mb-3">
@@ -44,16 +45,16 @@
           </div>
           <div class="form-row">
             <div class="col-md-3 mb-3">
-              <%= af.input :street_name, placeholder: '25 de mayo', input_html: { class: 'form-control', maxlength: 25 } %>
+              <%= af.input :street_name, placeholder: '25 de mayo', disabled: true, input_html: { class: 'form-control', maxlength: 25 } %>
             </div>
             <div class="col-md-3 mb-3">
-              <%= af.input :street_number, placeholder: '222', input_html: { class: 'form-control', maxlength: 6 } %>
+              <%= af.input :street_number, placeholder: '222', disabled: true, input_html: { class: 'form-control', maxlength: 6 } %>
             </div>
             <div class="col-md-3 mb-3">
-              <%= af.input :apartament, input_html: { class: 'form-control', maxlength: 5 } %>
+              <%= af.input :apartament, disabled: true, input_html: { class: 'form-control', maxlength: 5 } %>
             </div>
             <div class="col-md-3 mb-3">
-              <%= af.input :zip, placeholder: '1896', input_html: { class: 'form-control', maxlength: 4 } %>
+              <%= af.input :zip, placeholder: '1896', disabled: true, input_html: { class: 'form-control', maxlength: 4 } %>
             </div>
           </div>
 
@@ -74,7 +75,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" onclick="submitOrderForm(event)">Pagar</button>
+        <button type="button" class="btn btn-primary" id="submitOrder">Pagar</button>
       </div>
     </div>
   </div>

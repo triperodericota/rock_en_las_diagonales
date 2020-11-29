@@ -17,11 +17,19 @@ class Order < ApplicationRecord
 
   before_create do |order|
     if self.delivery
-      validates_associated :address
+      self.class.validates_associated :address
     end
   end
 
-  def create_checkout_with(success_url, pending_url, failure_url)
+  def payment_status
+    unless self.payment.nil?
+      return self.payment.status
+    else
+      "desconocido"
+    end
+  end
+
+  def create_checkout_with()
     preferenceData = {
         "items": [ self.product.hash_data_for_order(self.units) ],
         "payer": self.buyer.hash_data_for_order,
@@ -39,6 +47,20 @@ class Order < ApplicationRecord
     self.preference_id = preference["response"]["id"]
     self.save
     preference
+  end
+
+  def status_css_style
+    unless self.payment.nil?
+      if self.payment.approved?
+        return 'badge-success'
+      elsif self.payment.rejected?
+        'badge-danger'
+      elsif self.payment.pending?
+        return 'badge-warning'
+      end
+    else
+      return 'badge badge-secondary'
+    end
   end
 
 

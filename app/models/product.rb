@@ -44,10 +44,10 @@ class Product < ApplicationRecord
   end
 
   def main_photo
-    if !self.photos.first.image.url.nil?
-      return self.photos.first.image.url
-    else
-      ActionController::Base.helpers.asset_path('default_product_photo.gif')
+    begin
+      self.photos.first.image.url
+    rescue
+      return ActionController::Base.helpers.asset_path('default_product_photo.gif')
     end
   end
 

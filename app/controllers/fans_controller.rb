@@ -7,6 +7,8 @@ class FansController < ApplicationController
   before_action :set_event, only: [:add_event, :remove_event]
   before_action :artist_params, only: [:follow_artist, :unfollow_artist]
   before_action :set_artist, only: [:follow_artist, :unfollow_artist]
+  before_action :order_params, only: [:my_purchases]
+
 
   # GET /fans/1
   # GET /fans/1.json
@@ -28,7 +30,7 @@ class FansController < ApplicationController
     @all_events = @fan.events
     @past_events = @all_events.select {|e| e.finished?}
     @next_events = @all_events - @past_events
-    @other_events = Event.where.has { start_date > DateTime.current } - @all_events
+    @other_events = Event.future_events - @all_events
   end
 
   # GET /fans/:id/followed_artists
@@ -60,6 +62,11 @@ class FansController < ApplicationController
     redirect_to @artist
   end
 
+  def my_purchases
+    current_page = order_params.nil? ? 1 : order_params[:page]
+    @orders = @fan.orders.paginate(:page => current_page, :per_page => 2)
+  end
+
   private
 
     def event_params
@@ -76,6 +83,10 @@ class FansController < ApplicationController
 
     def set_artist
       @artist = Artist.find_by(name: params[:name])
+    end
+
+    def order_params
+      params.permit(:id, :page)
     end
 
 end

@@ -1,5 +1,7 @@
 class Artist < ApplicationRecord
 
+  include Rails.application.routes.url_helpers
+
   has_one :user, as: :profile, dependent: :destroy
   accepts_nested_attributes_for :user
   has_and_belongs_to_many :fans
@@ -8,7 +10,15 @@ class Artist < ApplicationRecord
 
   validates :name, length: { maximum: 255 }, presence: true, uniqueness: true
 
-  scope :with_search_name, -> (search_name) {where.has {name =~ search_name}}
+  scope :with_search_name, -> (search_name) {where ("name LIKE ?"), search_name}
+
+  def to_s
+    self.name
+  end
+
+  def base_uri
+    artist_path(self)
+  end
 
   def to_param
     name
