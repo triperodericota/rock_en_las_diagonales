@@ -4,8 +4,15 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+one:
+  status: 'Approved'
+  payment_type: 'credit card'
+  merchant_order_id: 1
+  mercadopago_payment_id: 1
+  order: product1_purchase1
+two:
+  status: 'Rejected'
+  payment_type: 'credit card'
+  merchant_order_id: 2
+  mercadopago_payment_id: 2
+  order: product2_purchase1

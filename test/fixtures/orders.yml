@@ -5,11 +5,11 @@ product1_purchase1:
   fan: one
   total_price: 0
   units: 1
-  state: one
+  preference_id: '00'
 
 product2_purchase1:
   product: two
   fan: two
   total_price: 0
   units: 1
-  state: one
+  preference_id: '01'

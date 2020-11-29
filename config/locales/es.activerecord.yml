@@ -37,3 +37,12 @@ es:
         street_number: 'Número'
         zip: 'Código postal'
         apartament: 'Departamento/Piso'
+      payment:
+        order: 'Orden'
+        status: 'Estado del pago'
+        payment_type: 'Modo de pago'
+        status:
+          approved: 'Aprobado'
+          rejected: 'Rechazado'
+          pending: 'Pendiente'
+          desconocido: 'Desconocido'
