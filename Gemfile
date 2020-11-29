@@ -40,7 +40,7 @@ gem 'sprockets', '~> 3.7.2'
 # Devise authentication
 gem 'devise', git: 'https://github.com/plataformatec/devise.git'
 # Bootstrap styles
-gem 'bootstrap', '~> 4.1.1'
+gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 # Simple-form
 gem 'simple_form'
