@@ -1,5 +1,7 @@
 class Event < ApplicationRecord
 
+  include Rails.application.routes.url_helpers
+
   belongs_to :artist
   has_many :audiences
   has_many :fans, through: :audiences
@@ -11,7 +13,16 @@ class Event < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
 
-  scope :fields_with_input_string, -> (input_string) {where.has {(title =~ input_string) | (place =~ input_string)}}
+  scope :fields_with_input_string, -> (input_string) {where ("title LIKE ? OR place LIKE ?"), input_string, input_string}
+  scope :future_events, -> { where ("start_date > ?"), Time.zone.now }
+
+  def to_s
+    self.title
+  end
+
+  def base_uri
+    artist_event_path(self.artist.name, self.id)
+  end
 
   def start_date_should_be_earlier_than_end_date
     if end_date <= start_date
