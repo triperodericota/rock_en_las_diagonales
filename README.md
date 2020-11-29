@@ -1,15 +1,18 @@
 # README
 
-Esta aplicación web fue escrita utilizando el framework Ruby on Rails(v 5.2.0).
-Básicamente a partir del uso de ella, artistas y productores de rock podrán registrarse
+Esta aplicación web fue escrita utilizando el framework Ruby on Rails(v 6.0.3.4).
+A partir d su uso, artistas y productores de rock podrán registrarse
 y utilizar la aplicación para publicar sus eventos, ofrecer y vender productos
-y  mostrarse ante la audencia.
+y  mostrarse ante la audencia. Se utiliza el SDK de MercadoPago para el proceso de 
+compra-venta de productos.
+Además, los usarios podrán seguir a sus artistas preferidos y agendar los eventos que más
+les interesen.
 
 **Dependencias del proyecto:**
 
 · Intérprete de Ruby(2.7.1p)
 
-· Ruby on Rails(5.2.4.1)
+· Ruby on Rails(6.0.3.4)
 
 · SQLite3 (en desarrollo)
 
@@ -20,11 +23,11 @@ Otras dependencias:
 
 · Bootstrap(4.1.3), como librería de estilos
 
-· Simple-form(5.0.2), para la construcción sencilla de formularios
+· Simple-form(5.0.3), para la construcción sencilla de formularios
 
-· Devise(4.7.1), como mecanismo de autenticación
+· Devise(4.7.3), como mecanismo de autenticación
 
-· CarrierWave(1.3.1), para la subida de archivos
+· CarrierWave(2.1.0), para la subida de archivos
 
 **Preparación del ambiente para la ejecución de la app:**
 
@@ -51,17 +54,23 @@ Se utiliza SQLite3 como motor de base de datos (en ambientes de desarrollo y tes
 
 3 - Creación de la DB y carga de datos:
 
-`$ rails db:migrate`
+`$ bin/rake db:migrate`
 
-`$ rails db:seeds`
+`$ bin/rake db:seed`
 
 o directamente:
 
-`$ rails db:setup`
+`$ bin/rails db:setup`
+
+4 - Instalar dependencias JS y compilar los assets:
+
+`$ bin/rake yarn:install `
+
+`$ bin/rake assets:precompile `
 
 4 - Para levantar y correr el servidor:
 
-`$ rails s`
+`$ bin/rails s`
 
 
 **Utilizando Docker**
